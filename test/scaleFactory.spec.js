@@ -2,142 +2,13 @@
 
   var expect = require('chai').expect,
       module = require('../src/js/scaleFactory'),
-      note = {},
-      scale = {},
+      note = require('./example-scales.js').note,
+      scale = require('./example-scales.js').scale,
       lowerBound,
       upperBound;
 
-  // Frequencies ref: http://www.phy.mtu.edu/~suits/notefreqs.html
-  note = {
-    C0: 16.35,
-    Cb2: 61.74,
-    A0: 27.50,
-    Gb2: 92.50,
-    Gb3: 185,
-    C4: 261.63,
-    A4: 440,
-    C5: 523.25,
-    Db5: 554.37,
-    Ab5: 830.61,
-    Bb5: 932.33,
-    E7: 2637.02,
-    B8: 7902.13
-  };
-
   lowerBound = note.C0;
   upperBound = note.B8;
-
-  // adjusted by up to 0.01Hz to allow for rounding 
-  scale.C4SingleOctave = [
-    261.63, // C4
-    293.67, // D4
-    329.63, // E4
-    349.23, // F4
-    392.00, // G4
-    440.01, // A4
-    493.89, // B4
-    523.26, // C5 
-  ];
-
-  scale.A0ChromaticEighteenNotes = [
-    27.50, // A0
-    29.14, // Bb0
-    30.87, // B0
-    32.70, // C1
-    34.65, // Db1
-    36.71, // D1
-    38.89, // Eb1
-    41.20, // E1
-    43.65, // F1
-    46.25, // Gb1
-    49.00, // G1
-    51.91, // Ab1
-    55.00, // A1
-    58.27, // Bb1
-    61.74, // B1
-    65.41, // C2
-    69.30, // Db2
-    73.42 // D2
-  ];
-
-  // adjusted by up to 0.02Hz to allow for rounding 
-  scale.Gb2WholeToneScaleThreeOctaves = [
-    92.50, // Gb2
-    103.83, // Ab2
-    116.54, // Bb2
-    130.81, // C3
-    146.83, // D3
-    164.82, // E3
-    185.00, // Gb3
-    207.66, // Ab3
-    233.09, // Bb3
-    261.63, // C4
-    293.67, // D4
-    329.63, // E4
-    370.00, // Gb4
-    415.31, // Ab4
-    466.17, // Bb4
-    523.26, // C5
-    587.34, // D5
-    659.27, // E5
-    740 // Gb5
-  ];
-
-  scale.C4MajorPentatonicTwoOctaves = [
-    523.25, // C5
-    587.33, // D5
-    659.25, // E5
-    783.99, // G5
-    880.00, // A5
-    1046.50, // C6
-    1174.66, // D6
-    1318.51, // E6
-    1567.98, // G6
-    1760.00, // A6
-    2093.00 // C7
-  ];
-
-  scale.Ab1MinorPentatonic6Notes = [
-    51.91, // Ab1
-    61.73, // B1
-    69.29, // Db2
-    77.78, // Eb2
-    92.49, // Gb2
-    103.82 // Ab2
-  ];
-
-  scale.Ab1MinorPentatonic30Notes = [
-    51.91, // Ab1
-    61.73, // B1
-    69.29, // Db2
-    77.78, // Eb2
-    92.49, // Gb2
-    103.82, // Ab2
-    123.46, // B2
-    138.58, // Db3
-    155.55, // Eb3
-    184.99, // Gb3
-    207.64, // Ab3
-    246.93, // B3
-    277.17, // Db4
-    311.11, // Eb4
-    369.97, // Gb4
-    415.28, // Ab4
-    493.85, // B4
-    554.33, // Db5
-    622.22, // Eb5
-    739.94, // Gb5
-    830.56, // Ab5
-    987.71, // B5
-    1108.66, // Db6
-    1244.43, // Eb6
-    1479.89, // Gb6
-    1661.12, // Ab6
-    1975.42, // B6
-    2217.33, // Db7
-    2488.87, // Eb7
-    2959.78, // Gb7
-  ];
 
   describe('ScaleFactory', function () {
 
@@ -206,6 +77,34 @@
         var result = getIntervalAdjustment('b');
 
         expect(result).to.equal(-1);
+      });
+
+      xit('handles invalid input, out of bounds etc.', function () {
+
+      });
+    });
+
+    describe('getCentsByInterval', function () {
+      var getCentsByInterval = module.getCentsByInterval;
+
+      it('provides correct value in cents for 0 semitones', function () {
+        expect(getCentsByInterval(0)).to.equal(0);
+      });
+
+      it('provides correct value in cents for 1 semitone', function () {
+        expect(getCentsByInterval(1)).to.equal(100);
+      });
+
+      it('provides correct value in cents for 33.33 semitones', function () {
+        expect(getCentsByInterval(33.33)).to.equal(3333);
+      });
+
+      it('provides correct value in cents for -1 semitone', function () {
+        expect(getCentsByInterval(-1)).to.equal(-100);
+      });
+
+      it('provides correct value in cents for -33.33 semitones', function () {
+        expect(getCentsByInterval(-33.33)).to.equal(-3333);
       });
 
       xit('handles invalid input, out of bounds etc.', function () {
@@ -342,37 +241,49 @@
       it('makes a C major scale, single octave (8 notes), starting at C4', function () {
         var result = getScale('major', 'C4', 8);
 
-        expect(result).to.deep.equal(scale.C4SingleOctave);
+        expect(result.inHertz).to.deep.equal(scale.C4MajorSingleOctave.inHertz);
+        expect(result.inSemiTones).to.deep.equal(scale.C4MajorSingleOctave.inSemiTones);
+        expect(result.inCents).to.deep.equal(scale.C4MajorSingleOctave.inCents);
       });
 
       it('makes a chromatic scale, 18 notes, starting at A0', function () {
         var result = getScale('chromatic', 'A0', 18);
 
-        expect(result).to.deep.equal(scale.A0ChromaticEighteenNotes);
+        expect(result.inHertz).to.deep.equal(scale.A0ChromaticEighteenNotes.inHertz);
+        expect(result.inSemiTones).to.deep.equal(scale.A0ChromaticEighteenNotes.inSemiTones);
+        expect(result.inCents).to.deep.equal(scale.A0ChromaticEighteenNotes.inCents);
       });
 
       it('makes a whole tone scale, three octaves (19 notes), starting at Gb2', function () {
         var result = getScale('wholeTone', 'Gb2', 19);
 
-         expect(result).to.deep.equal(scale.Gb2WholeToneScaleThreeOctaves);
+        expect(result.inHertz).to.deep.equal(scale.Gb2WholeToneScaleThreeOctaves.inHertz);
+        expect(result.inSemiTones).to.deep.equal(scale.Gb2WholeToneScaleThreeOctaves.inSemiTones);
+        expect(result.inCents).to.deep.equal(scale.Gb2WholeToneScaleThreeOctaves.inCents);
       });
 
       it('makes a major pentatonic scale, two octaves (11 notes), starting at C5', function () {
         var result = getScale('majorPentatonic', 'C5', 11);
 
-        expect(result).to.deep.equal(scale.C4MajorPentatonicTwoOctaves);
+        expect(result.inHertz).to.deep.equal(scale.C4MajorPentatonicTwoOctaves.inHertz);
+        expect(result.inSemiTones).to.deep.equal(scale.C4MajorPentatonicTwoOctaves.inSemiTones);
+        expect(result.inCents).to.deep.equal(scale.C4MajorPentatonicTwoOctaves.inCents);
       });
 
       it('makes a minor pentatonic scale, 6 notes, starting at Ab1', function () {
         var result = getScale('minorPentatonic', 'Ab1', 6);
 
-        expect(result).to.deep.equal(scale.Ab1MinorPentatonic6Notes);
+        expect(result.inHertz).to.deep.equal(scale.Ab1MinorPentatonic6Notes.inHertz);
+        expect(result.inSemiTones).to.deep.equal(scale.Ab1MinorPentatonic6Notes.inSemiTones);
+        expect(result.inCents).to.deep.equal(scale.Ab1MinorPentatonic6Notes.inCents);
       });
 
       it('makes a minor pentatonic scale, 30 notes, starting at Ab1', function () {
         var result = getScale('minorPentatonic', 'Ab1', 30);
 
-        expect(result).to.deep.equal(scale.Ab1MinorPentatonic30Notes);
+        expect(result.inHertz).to.deep.equal(scale.Ab1MinorPentatonic30Notes.inHertz);
+        expect(result.inSemiTones).to.deep.equal(scale.Ab1MinorPentatonic30Notes.inSemiTones);
+        expect(result.inCents).to.deep.equal(scale.Ab1MinorPentatonic30Notes.inCents);
       });
 
       xit('handles invalid input, out of bounds etc.', function () {

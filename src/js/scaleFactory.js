@@ -1,6 +1,11 @@
 module.exports = (function () {
   'use strict';
 
+  // TODO:
+  // * ADD TESTS FOR .inCents AND .inSemitones VERSIONS OF:
+  //   * getNoteByName()
+  //   * getScale()
+
   /*
    * useful references for the frequency of musical notes and related forumlae:
    * 
@@ -16,24 +21,22 @@ module.exports = (function () {
       },
       MIN_FREQUENCY = REF_FREQUENCIES.C0, // C0
       MAX_FREQUENCY = REF_FREQUENCIES.B8, // B8
+      CENTS_PER_SEMITONE = 100,
       scaleDefs = {};
 
   // the sequence of intervals (in semitones) between each note in a given type of scale
   // expressed as an array for each scale
-  // we could go on with many other exotic scales, but really, this is plenty for most people
   // TODO: complete basic set of scales
   scaleDefs.chromatic = [1];
   scaleDefs.wholeTone = [2];
   scaleDefs.major = [2, 2, 1, 2, 2, 2, 1];
-  scaleDefs.naturalMinor = [];
-  scaleDefs.harmonicMinor = [];
-  scaleDefs.melodicMinor = [];
   scaleDefs.majorPentatonic = [2, 2, 3, 2, 3];
   scaleDefs.minorPentatonic = [3, 2, 2, 3, 2];
   scaleDefs.kuomiPentatonic = [1, 4, 2, 1, 4];
   scaleDefs.chinesePentatonic = [4, 2, 1, 4, 1];
-  scaleDefs.bluesMinor = [];
-  scaleDefs.bluesMajor = [];
+  scaleDefs.naturalMinor = [];
+  scaleDefs.harmonicMinor = [];
+  scaleDefs.melodicMinor = [];
 
   /*
    * Maths helpers
@@ -89,7 +92,7 @@ module.exports = (function () {
    */
 
   // TODO: incorporate into getIntervalFromA4
-  ScaleFactory.getIntervalAdjustment = function(sharpOrFlat) {
+  ScaleFactory.getIntervalAdjustment = function (sharpOrFlat) {
     var adjustments = {
       '#': 1,
       'b': -1
@@ -102,12 +105,11 @@ module.exports = (function () {
     return adjustments[sharpOrFlat];
   };
 
-  ScaleFactory.getNoteNameComponents = function(noteString) {
-    // return {
-    //   name: 'A',
-    //   sharpOrFlat: '',
-    //   octave: 4
-    // };
+  /**
+   * returns the number of cents (detune) given an interval in semitones
+   */
+  ScaleFactory.getCentsByInterval = function (interval) {
+     return interval * CENTS_PER_SEMITONE;
   };
 
   /*
@@ -124,7 +126,6 @@ module.exports = (function () {
         sharpOrFlat = sharpOrFlatMatch ? sharpOrFlatMatch[0] : null,
         octave = octaveMatch ? parseInt(octaveMatch[0], 10) : null,
         intervalFromA,
-        frequency,
         adjustedInterval;
 
     if (!noteName || typeof octave !== 'number') {
@@ -133,9 +134,8 @@ module.exports = (function () {
 
     intervalFromA = ScaleFactory.getIntervalFromA4(noteName, octave);
     adjustedInterval = intervalFromA + ScaleFactory.getIntervalAdjustment(sharpOrFlat);
-    frequency = ScaleFactory.getNoteByInterval(REF_FREQUENCIES.A4, adjustedInterval);
 
-    return frequency;
+    return ScaleFactory.getNoteByInterval(REF_FREQUENCIES.A4, adjustedInterval);
   };
 
   /*
@@ -143,26 +143,39 @@ module.exports = (function () {
    * given the type of scale, the frequency of a starting note, and the number of notes
    */
 
-  // TODO: get all notes relative to A4
-  // TODO: option to return cents detune adjustments rather than frequency
+  // TODO: get all notes relative to A4?
+  // TODO: return scale in cents, hertz and semitone intervals
   ScaleFactory.getScale = function (scaleType, startNote, noteCount) {
     var i,
         scaleDef = scaleDefs[scaleType],
-        scale = [],
+        scaleInHertz = [],
+        scaleInCents = [],
+        scaleInSemitones = [],
         intervalsFromStartNote = 0,
         intervalCounter = 0,
         startFrequency = ScaleFactory.getNoteByName(startNote);
 
     // the first note is always the starting frequency
-    scale.push(startFrequency);
+    scaleInHertz.push(startFrequency);
+    scaleInCents.push(0);
+    scaleInSemitones.push(0);
 
     for(i = 0; i < noteCount - 1; i += 1) {
       intervalsFromStartNote += scaleDef[intervalCounter];
-      scale.push(ScaleFactory.getNoteByInterval(startFrequency, intervalsFromStartNote));
+
+      scaleInHertz.push(ScaleFactory.getNoteByInterval(startFrequency, intervalsFromStartNote));
+      scaleInCents.push(ScaleFactory.getCentsByInterval(intervalsFromStartNote));
+      scaleInSemitones.push(intervalsFromStartNote);
+
       intervalCounter = (intervalCounter === scaleDef.length - 1) ? 0 : intervalCounter + 1;
     }
 
-    return scale;
+    return {
+      startNote: startFrequency,
+      inHertz: scaleInHertz,
+      inCents: scaleInCents,
+      inSemiTones: scaleInSemitones
+    };
   };
 
   return ScaleFactory;
