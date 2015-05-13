@@ -70,3 +70,6 @@ $ grunt
 
 ### 0.0.1
 * Initial commit; grunt, jshint & mocha tests hooked up
+
+### 0.0.2
+* getScale() now returns result in hertz, semitones and cents; refactored tests and added additional tests for semitones & hertz; removed test scale & note references into a separate module
