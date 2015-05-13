@@ -29,23 +29,16 @@ To be completed...
 
 To be completed...
 
-### getIntervalFromA4(noteName, octave)
-
-To be completed...
-
-### getNoteByInterval(reference, interval)
-
-To be completed...
-
 ### TODO: addScaleType(intervalsArray)
 
 To be completed...
 
-## Dependencies
+## Development
+
+### Dependencies
+
 * [grunt](http://gruntjs.com/)
 * [node](https://nodejs.org/)
-
-## Development
 
 Source files live in `src/`
 
