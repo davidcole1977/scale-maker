@@ -20,7 +20,7 @@ Given a start note, the type of scale and the number of notes in the scale, retu
 
 #### Arguments
 
-`scaleType` (String) string representing the type of scale. eg. `'major'`,  'chromatic', etc.
+**`scaleType`** (String) string representing the type of scale. eg. `'major'`,  `'chromatic'`, etc.
 
 Possible values:
 * `'chromatic'`
