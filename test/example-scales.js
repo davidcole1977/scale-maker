@@ -30,7 +30,7 @@ module.exports = (function () {
     392.00, // G4
     440.01, // A4
     493.89, // B4
-    523.26, // C5 
+    523.26 // C5 
   ];
   scale.C4MajorSingleOctave.inSemiTones = [
     0,
