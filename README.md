@@ -20,7 +20,7 @@ Given a start note, the type of scale and the number of notes in the scale, retu
 
 #### Arguments
 
-**`scaleType`** (String) string representing the type of scale. eg. `'major'`,  `'chromatic'`, etc.
+**`scaleType` (String)** string representing the type of scale. eg. `'major'`,  `'chromatic'`, etc.
 
 Possible values:
 * `'chromatic'`
@@ -34,7 +34,7 @@ Possible values:
 * `'harmonicMinor'` (not yet implemented)
 * `'melodicMinor'` (not yet implemented)
 
-`startNote` (String) The note name, flat or sharp flag, and octave number of the first note of the scale expressed as a 2 or 3 character string, eg:
+**`startNote` (String)** The note name, flat or sharp flag, and octave number of the first note of the scale expressed as a 2 or 3 character string, eg:
 
 * `'Ab5'` is the note A flat in the 5th octave
 * `'C0'` is the note C in the bottom octave
@@ -43,10 +43,10 @@ Possible values:
 The lowest note allowed is `'C0'`
 The highest note allowed is `'B8`
 
-`noteCount` (Number) The number of notes you'd like in the scale. For instance if you want two octaves of a major scale, that's 15 notes.
+**`noteCount` (Number)** The number of notes you'd like in the scale. For instance if you want two octaves of a major scale, that's 15 notes.
 
 #### Returns
-(Object) Object with three parameters, each an array representing the value of notes in hertz, cents and semitone intervals in the form
+**(Object)** Object with three parameters, each an array representing the value of notes in hertz, cents and semitone intervals in the form
 
 ```js
 {
@@ -81,7 +81,7 @@ Given a musical note, expressed as a string, returns the value of that note in h
 
 #### Arguments
 
-`note` (String) The note name, flat or sharp flag, and octave number of the note expressed as a 2 or 3 character string, eg:
+**`note` (String)** The note name, flat or sharp flag, and octave number of the note expressed as a 2 or 3 character string, eg:
 
 * `'Ab5'` is the note A flat in the 5th octave
 * `'C0'` is the note C in the bottom octave
@@ -91,7 +91,7 @@ The lowest note allowed is `'C0'`
 The highest note allowed is `'B8'`
 
 #### Returns
-(Object) Object with three parameters, each an array representing the value of notes in hertz, cents and semitone intervals in the form
+**(Number)** The frequency value of the note in hertz.
 
 #### Example usage
 
@@ -106,9 +106,9 @@ Given a name and array of semitone intervals, creates a new scale type, which yo
 
 #### Arguments
 
-`name` (String) String representing the type of scale, which will then be used to reference the scale when creating a scale using getScale().
+**`name` (String)** String representing the type of scale, which will then be used to reference the scale when creating a scale using getScale().
 
-`intervals` (Array) Array of integers representing the semitone intervals between each note in the scale. For instance, a major scale would be expressed as
+**`intervals` (Array)** Array of integers representing the semitone intervals between each note in the scale. For instance, a major scale would be expressed as
 
 ```js
 [2, 2, 1, 2, 2, 2, 1]
