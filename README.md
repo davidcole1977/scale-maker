@@ -2,7 +2,7 @@
 
 Returns a variety of musical scales as arrays of values (as frequency in Hertz or cents for use as a detune) for use in the Web Audio Javascript API and other Javascript-based audio environments.
 
-This is very much work in progress. When it is complete, it will be available to install as an NPM or Bower dependency.
+This is a work in progress. When it is complete, it will be available to install as an NPM or Bower dependency.
 
 ## Installation
 
@@ -72,9 +72,11 @@ For example, if requesting a major scale with 8 notes, starting on C in the 4th 
 
 ```js
 // create a minor pentatonic scale over 2 octaves (9 notes), starting on F# in the 5th octave and get the value of the notes in hertz
-var myScaleInHertz = scaleFactory.getScale('minorPentatonic', 'F#5', 9).inHertz;
+var myScaleInHertz = ScaleFactory.getScale('minorPentatonic', 'F#5', 9).inHertz;
 
 ```
+
+---------------------------
 
 ### getNoteByName(note)
 
@@ -98,8 +100,10 @@ The highest note allowed is `'B8'`
 
 ```js
 // gets the frequency of a G flat in the 3rd octave
-var myNoteInHertz = scaleFactory.getNoteByName('Gb3');
+var myNoteInHertz = ScaleFactory.getNoteByName('Gb3');
 ```
+
+---------------------------
 
 ### addScaleType(name, intervals) (NOT YET IMPLEMENTED)
 
@@ -119,10 +123,10 @@ Given a name and array of semitone intervals, creates a new scale type, which yo
 
 ```js
 // adds a new scale type called 'myWeirdScale'
-scaleFactory.addScaleType('myWeirdScale', [1, 2, 2, 3, 1, 2]);
+ScaleFactory.addScaleType('myWeirdScale', [1, 2, 2, 3, 1, 2]);
 
 // which can now be used to create a new scale
-var myWeirdScaleInCents = scaleFactory.getScale('myWeirdScale', 'Ab4', 13).inCents;
+var myWeirdScaleInCents = ScaleFactory.getScale('myWeirdScale', 'Ab4', 13).inCents;
 ```
 
 ## Development
