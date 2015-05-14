@@ -41,9 +41,9 @@ Possible values:
 * `'F#8'` is the note F sharp in the 8th octave
 
 The lowest note allowed is `'C0'`
-The highest note allowed is `'B8`
+The highest note allowed is `'B8'`
 
-**`noteCount` (Number)** The number of notes you'd like in the scale. For instance if you want two octaves of a major scale, that's 15 notes.
+**`noteCount` (Integer)** The number of notes you'd like in the scale. For instance if you want two octaves of a major scale, that's 15 notes.
 
 #### Returns
 **(Object)** Object with three parameters, each an array representing the value of notes in hertz, cents and semitone intervals in the form
@@ -71,8 +71,9 @@ For example, if requesting a major scale with 8 notes, starting on C in the 4th 
 #### Example usage
 
 ```js
-// create a minor pentatonic scale over 2 octaves (9 notes), starting on F# in the 5th octave
-getScale('minorPentatonic', 'F#5', 9);
+// create a minor pentatonic scale over 2 octaves (9 notes), starting on F# in the 5th octave and get the value of the notes in hertz
+var myScaleInHertz = scaleFactory.getScale('minorPentatonic', 'F#5', 9).inHertz;
+
 ```
 
 ### getNoteByName(note)
@@ -97,7 +98,7 @@ The highest note allowed is `'B8'`
 
 ```js
 // gets the frequency of a G flat in the 3rd octave
-getNoteByName('Gb3');
+var myNoteInHertz = scaleFactory.getNoteByName('Gb3');
 ```
 
 ### addScaleType(name, intervals) (NOT YET IMPLEMENTED)
@@ -118,10 +119,10 @@ Given a name and array of semitone intervals, creates a new scale type, which yo
 
 ```js
 // adds a new scale type called 'myWeirdScale'
-addScaleType('myWeirdScale', [1, 2, 2, 3, 1, 2]);
+scaleFactory.addScaleType('myWeirdScale', [1, 2, 2, 3, 1, 2]);
 
 // which can now be used to create a new scale
-getScale('myWeirdScale', 'Ab4', 13);
+var myWeirdScaleInCents = scaleFactory.getScale('myWeirdScale', 'Ab4', 13).inCents;
 ```
 
 ## Development
