@@ -14,7 +14,7 @@ To be completed...
 
 ## Methods
 
-### getScale(scaleType, startNote, noteCount)
+### makeScale(scaleType, startNote, noteCount)
 
 Given a start note, the type of scale and the number of notes in the scale, returns an object with three arrays: the note values in hertz, cents and semitone intervals.
 
@@ -72,13 +72,13 @@ For example, if requesting a major scale with 8 notes, starting on C in the 4th 
 
 ```js
 // create a minor pentatonic scale over 2 octaves (9 notes), starting on F# in the 5th octave and get the value of the notes in hertz
-var myScaleInHertz = ScaleFactory.getScale('minorPentatonic', 'F#5', 9).inHertz;
+var myScaleInHertz = ScaleFactory.makeScale('minorPentatonic', 'F#5', 9).inHertz;
 
 ```
 
 ---------------------------
 
-### getNoteByName(note)
+### getNote(note)
 
 Given a musical note, expressed as a string, returns the value of that note in hertz, where A4 is 440Hz.
 
@@ -100,18 +100,18 @@ The highest note allowed is `'B8'`
 
 ```js
 // gets the frequency of a G flat in the 3rd octave
-var myNoteInHertz = ScaleFactory.getNoteByName('Gb3');
+var myNoteInHertz = ScaleFactory.getNote('Gb3');
 ```
 
 ---------------------------
 
-### addScaleType(name, intervals) (NOT YET IMPLEMENTED)
+### addScale(name, intervals) (NOT YET IMPLEMENTED)
 
-Given a name and array of semitone intervals, creates a new scale type, which you can then use to create a scale using getScale().
+Given a name and array of semitone intervals, creates a new scale type, which you can then use to create a scale using makeScale().
 
 #### Arguments
 
-**`name` (String)** String representing the type of scale, which will then be used to reference the scale when creating a scale using getScale().
+**`name` (String)** String representing the type of scale, which will then be used to reference the scale when creating a scale using makeScale().
 
 **`intervals` (Array)** Array of integers representing the semitone intervals between each note in the scale. For instance, a major scale would be expressed as
 
@@ -123,10 +123,10 @@ Given a name and array of semitone intervals, creates a new scale type, which yo
 
 ```js
 // adds a new scale type called 'myWeirdScale'
-ScaleFactory.addScaleType('myWeirdScale', [1, 2, 2, 3, 1, 2]);
+ScaleFactory.addScale('myWeirdScale', [1, 2, 2, 3, 1, 2]);
 
 // which can now be used to create a new scale
-var myWeirdScaleInCents = ScaleFactory.getScale('myWeirdScale', 'Ab4', 13).inCents;
+var myWeirdScaleInCents = ScaleFactory.makeScale('myWeirdScale', 'Ab4', 13).inCents;
 ```
 
 ## Development
@@ -161,4 +161,11 @@ $ grunt
 * Initial commit; grunt, jshint & mocha tests hooked up
 
 ### 0.0.2
-* getScale() now returns result in hertz, semitones and cents; refactored tests and added additional tests for semitones & hertz; removed test scale & note references into a separate module
+* getScale() now returns result in hertz, semitones and cents
+* refactored tests and added additional tests for semitones & hertz
+* removed test scale & note references into a separate module
+
+### 0.0.3
+* changed function names getScale() to makeScale() and getNoteByName() to getNote()
+* divided exported functions into functions exported for testing purposes and functions exported as part of the public API
+* added new addScale() function

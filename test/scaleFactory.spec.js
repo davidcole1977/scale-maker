@@ -4,16 +4,13 @@
       module = require('../src/js/scaleFactory'),
       note = require('./example-scales.js').note,
       scale = require('./example-scales.js').scale,
-      lowerBound,
-      upperBound;
-
-  lowerBound = note.C0;
-  upperBound = note.B8;
+      lowerBound = note.C0,
+      upperBound = note.B8;
 
   describe('ScaleFactory', function () {
 
     describe('getIntervalFromA4()', function () {
-      var getIntervalFromA4 = module.getIntervalFromA4;
+      var getIntervalFromA4 = module.test.getIntervalFromA4;
 
       it('exists', function () {
         expect(typeof getIntervalFromA4).to.equal('function');
@@ -61,7 +58,7 @@
     });
 
     describe('getIntervalAdjustment()', function () {
-      var getIntervalAdjustment = module.getIntervalAdjustment;
+      var getIntervalAdjustment = module.test.getIntervalAdjustment;
 
       it('exists', function () {
         expect(typeof getIntervalAdjustment).to.equal('function');
@@ -85,7 +82,7 @@
     });
 
     describe('getCentsByInterval', function () {
-      var getCentsByInterval = module.getCentsByInterval;
+      var getCentsByInterval = module.test.getCentsByInterval;
 
       it('provides correct value in cents for 0 semitones', function () {
         expect(getCentsByInterval(0)).to.equal(0);
@@ -112,56 +109,8 @@
       });
     });
 
-    describe('getNoteByName()', function () {
-      var getNoteByName = module.getNoteByName;
-
-      it('exists', function () {
-        expect(typeof getNoteByName).to.equal('function');
-      });
-
-      it('returns correct frequency for A4', function () {
-        var result = getNoteByName('A4');
-
-        expect(result).to.equal(note.A4);
-      });
-
-      it('returns correct frequency for C0', function () {
-        var result = getNoteByName('C0');
-
-        expect(result).to.equal(note.C0);
-      });
-
-      it('returns correct frequency for B8', function () {
-        var result = getNoteByName('B8');
-
-        expect(result).to.equal(note.B8);
-      });
-
-      it('returns correct frequency for F#3', function () {
-        var result = getNoteByName('F#3');
-
-        expect(result).to.equal(note.Gb3);
-      });
-
-      it('returns correct frequency for Bb5', function () {
-        var result = getNoteByName('Bb5');
-
-        expect(result).to.equal(note.Bb5);
-      });
-
-      it('returns correct frequency for Cb2', function () {
-        var result = getNoteByName('Cb2');
-
-        expect(result).to.equal(note.Cb2);
-      });
-
-      xit('handles invalid input, out of bounds etc.', function () {
-        expect(true).to.equal(false);
-      });
-    });
-
     describe('getNoteByInterval()', function () {
-      var getNoteByInterval = module.getNoteByInterval;
+      var getNoteByInterval = module.test.getNoteByInterval;
 
       it('exists', function () {
         expect(typeof getNoteByInterval).to.equal('function');
@@ -231,15 +180,63 @@
 
     });
 
-    describe('getScale()', function () {
-      var getScale = module.getScale;
+    describe('getNote()', function () {
+      var getNote = module.getNote;
 
       it('exists', function () {
-        expect(typeof getScale).to.equal('function');
+        expect(typeof getNote).to.equal('function');
+      });
+
+      it('returns correct frequency for A4', function () {
+        var result = getNote('A4');
+
+        expect(result).to.equal(note.A4);
+      });
+
+      it('returns correct frequency for C0', function () {
+        var result = getNote('C0');
+
+        expect(result).to.equal(note.C0);
+      });
+
+      it('returns correct frequency for B8', function () {
+        var result = getNote('B8');
+
+        expect(result).to.equal(note.B8);
+      });
+
+      it('returns correct frequency for F#3', function () {
+        var result = getNote('F#3');
+
+        expect(result).to.equal(note.Gb3);
+      });
+
+      it('returns correct frequency for Bb5', function () {
+        var result = getNote('Bb5');
+
+        expect(result).to.equal(note.Bb5);
+      });
+
+      it('returns correct frequency for Cb2', function () {
+        var result = getNote('Cb2');
+
+        expect(result).to.equal(note.Cb2);
+      });
+
+      xit('handles invalid input, out of bounds etc.', function () {
+        expect(true).to.equal(false);
+      });
+    });
+
+    describe('makeScale()', function () {
+      var makeScale = module.makeScale;
+
+      it('exists', function () {
+        expect(typeof makeScale).to.equal('function');
       });
 
       it('makes a C major scale, single octave (8 notes), starting at C4', function () {
-        var result = getScale('major', 'C4', 8);
+        var result = makeScale('major', 'C4', 8);
 
         expect(result.inHertz).to.deep.equal(scale.C4MajorSingleOctave.inHertz);
         expect(result.inSemiTones).to.deep.equal(scale.C4MajorSingleOctave.inSemiTones);
@@ -247,7 +244,7 @@
       });
 
       it('makes a chromatic scale, 18 notes, starting at A0', function () {
-        var result = getScale('chromatic', 'A0', 18);
+        var result = makeScale('chromatic', 'A0', 18);
 
         expect(result.inHertz).to.deep.equal(scale.A0ChromaticEighteenNotes.inHertz);
         expect(result.inSemiTones).to.deep.equal(scale.A0ChromaticEighteenNotes.inSemiTones);
@@ -255,7 +252,7 @@
       });
 
       it('makes a whole tone scale, three octaves (19 notes), starting at Gb2', function () {
-        var result = getScale('wholeTone', 'Gb2', 19);
+        var result = makeScale('wholeTone', 'Gb2', 19);
 
         expect(result.inHertz).to.deep.equal(scale.Gb2WholeToneScaleThreeOctaves.inHertz);
         expect(result.inSemiTones).to.deep.equal(scale.Gb2WholeToneScaleThreeOctaves.inSemiTones);
@@ -263,7 +260,7 @@
       });
 
       it('makes a major pentatonic scale, two octaves (11 notes), starting at C5', function () {
-        var result = getScale('majorPentatonic', 'C5', 11);
+        var result = makeScale('majorPentatonic', 'C5', 11);
 
         expect(result.inHertz).to.deep.equal(scale.C4MajorPentatonicTwoOctaves.inHertz);
         expect(result.inSemiTones).to.deep.equal(scale.C4MajorPentatonicTwoOctaves.inSemiTones);
@@ -271,7 +268,7 @@
       });
 
       it('makes a minor pentatonic scale, 6 notes, starting at Ab1', function () {
-        var result = getScale('minorPentatonic', 'Ab1', 6);
+        var result = makeScale('minorPentatonic', 'Ab1', 6);
 
         expect(result.inHertz).to.deep.equal(scale.Ab1MinorPentatonic6Notes.inHertz);
         expect(result.inSemiTones).to.deep.equal(scale.Ab1MinorPentatonic6Notes.inSemiTones);
@@ -279,11 +276,32 @@
       });
 
       it('makes a minor pentatonic scale, 30 notes, starting at Ab1', function () {
-        var result = getScale('minorPentatonic', 'Ab1', 30);
+        var result = makeScale('minorPentatonic', 'Ab1', 30);
 
         expect(result.inHertz).to.deep.equal(scale.Ab1MinorPentatonic30Notes.inHertz);
         expect(result.inSemiTones).to.deep.equal(scale.Ab1MinorPentatonic30Notes.inSemiTones);
         expect(result.inCents).to.deep.equal(scale.Ab1MinorPentatonic30Notes.inCents);
+      });
+
+      xit('handles invalid input, out of bounds etc.', function () {
+
+      });
+
+    });
+
+    describe('addScale()', function () {
+      var addScale = module.addScale;
+
+      it('exists', function () {
+        expect(typeof addScale).to.equal('function');
+      });
+
+      it('adds a new scale definition that can be used to make a scale', function () {
+        addScale('myWeirdScale', [1, 2, 3, 4, 5]);
+
+        var result = module.makeScale('myWeirdScale', 'A4', 6).inCents;
+
+        expect(result).to.deep.equal([0, 100, 300, 600, 1000, 1500]);
       });
 
       xit('handles invalid input, out of bounds etc.', function () {

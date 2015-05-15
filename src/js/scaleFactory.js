@@ -1,11 +1,6 @@
 module.exports = (function () {
   'use strict';
 
-  // TODO:
-  // * ADD TESTS FOR .inCents AND .inSemitones VERSIONS OF:
-  //   * getNoteByName()
-  //   * getScale()
-
   /*
    * useful references for the frequency of musical notes and related forumlae:
    * 
@@ -116,9 +111,7 @@ module.exports = (function () {
    * returns the frequency of a note that's equivalent to a friendly string,
    * such as 'A4', 'C0', 'F#5', 'Gb2', 'Cb7'
    */
-
-  // TODO: put noteString parsing in getNoteNameComponents
-  ScaleFactory.getNoteByName = function (noteString) {
+  ScaleFactory.getNote = function (noteString) {
     var noteNameMatch = noteString.match(/^[A-G]/g),
         sharpOrFlatMatch = noteString.match(/[b#]/g),
         octaveMatch = noteString.match(/[0-8]/g),
@@ -144,8 +137,7 @@ module.exports = (function () {
    */
 
   // TODO: get all notes relative to A4?
-  // TODO: return scale in cents, hertz and semitone intervals
-  ScaleFactory.getScale = function (scaleType, startNote, noteCount) {
+  ScaleFactory.makeScale = function (scaleType, startNote, noteCount) {
     var i,
         scaleDef = scaleDefs[scaleType],
         scaleInHertz = [],
@@ -153,7 +145,7 @@ module.exports = (function () {
         scaleInSemitones = [],
         intervalsFromStartNote = 0,
         intervalCounter = 0,
-        startFrequency = ScaleFactory.getNoteByName(startNote);
+        startFrequency = ScaleFactory.getNote(startNote);
 
     // the first note is always the starting frequency
     scaleInHertz.push(startFrequency);
@@ -178,7 +170,23 @@ module.exports = (function () {
     };
   };
 
-  return ScaleFactory;
+  ScaleFactory.addScale = function (name, scaleDef) {
+    scaleDefs[name] = scaleDef;
+  };
+
+  return {
+    makeScale: ScaleFactory.makeScale,
+    getNote: ScaleFactory.getNote,
+    addScale: ScaleFactory.addScale,
+
+    // exported for testing purposes – not part of the public API
+    test: {
+      getIntervalFromA4: ScaleFactory.getIntervalFromA4,
+      getIntervalAdjustment: ScaleFactory.getIntervalAdjustment,
+      getCentsByInterval: ScaleFactory.getCentsByInterval,
+      getNoteByInterval: ScaleFactory.getNoteByInterval
+    }
+  };
   
 }());
 
