@@ -105,7 +105,7 @@ var myNoteInHertz = ScaleFactory.getNote('Gb3');
 
 ---------------------------
 
-### addScale(name, intervals) (NOT YET IMPLEMENTED)
+### addScale(name, intervals)
 
 Given a name and array of semitone intervals, creates a new scale type, which you can then use to create a scale using makeScale().
 
@@ -113,7 +113,7 @@ Given a name and array of semitone intervals, creates a new scale type, which yo
 
 **`name` (String)** String representing the type of scale, which will then be used to reference the scale when creating a scale using makeScale().
 
-**`intervals` (Array)** Array of integers representing the semitone intervals between each note in the scale. For instance, a major scale would be expressed as
+**`intervals` (Array)** Array of integers representing the semitone intervals between each note in a single, whole octave of the scale. For instance, a major scale would be expressed as
 
 ```js
 [2, 2, 1, 2, 2, 2, 1]
