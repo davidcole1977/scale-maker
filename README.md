@@ -71,6 +71,8 @@ For example, if requesting a major scale with 8 notes, starting on C in the 4th 
 #### Example usage
 
 ```js
+var ScaleFactory = require('scaleFactory');
+
 // create a minor pentatonic scale over 2 octaves (9 notes), starting on F# in the 5th octave and get the value of the notes in hertz
 var myScaleInHertz = ScaleFactory.makeScale('minorPentatonic', 'F#5', 9).inHertz;
 
@@ -99,6 +101,8 @@ The highest note allowed is `'B8'`
 #### Example usage
 
 ```js
+var ScaleFactory = require('scaleFactory');
+
 // gets the frequency of a G flat in the 3rd octave
 var myNoteInHertz = ScaleFactory.getNote('Gb3');
 ```
@@ -122,6 +126,8 @@ Given a name and array of semitone intervals, creates a new scale type, which yo
 #### Example usage
 
 ```js
+var ScaleFactory = require('scaleFactory');
+
 // adds a new scale type called 'myWeirdScale'
 ScaleFactory.addScale('myWeirdScale', [1, 2, 2, 3, 1, 2]);
 
@@ -155,17 +161,25 @@ $ grunt
 
 *See `gruntfile.js` for more details of the grunt tasks*
 
-## Release History:
+## Known Issues
+
+* Incompatible with Internet Explorer versions 8 and below
+
+## Release History
 
 ### 0.0.1
 * Initial commit; grunt, jshint & mocha tests hooked up
 
 ### 0.0.2
 * getScale() now returns result in hertz, semitones and cents
-* refactored tests and added additional tests for semitones & hertz
 * removed test scale & note references into a separate module
 
 ### 0.0.3
 * changed function names getScale() to makeScale() and getNoteByName() to getNote()
 * divided exported functions into functions exported for testing purposes and functions exported as part of the public API
 * added new addScale() function
+
+### 0.0.4
+* removed unnecessary ScaleFactory constructor function
+* added input validation functions isValidNoteName(), isValidScaleName(), isValidScaleDefinition(), isScaleTypeDefined(), isPositiveIntegerGreaterThanZero() (not yet incorporated into public API functions)
+* added JS compression to grunt build

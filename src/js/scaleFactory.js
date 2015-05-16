@@ -41,18 +41,9 @@ module.exports = (function () {
   }
 
   /*
-   * Constructor
-   */
-  function ScaleFactory () { }
-
-  /*
    * returns the frequency of a note that's a given number of semitones from the reference frequency (interval can be negative)
    */ 
-  ScaleFactory.getNoteByInterval = function (reference, interval) {
-    if (typeof reference !== 'number' || typeof interval !== 'number') {
-      throw new Error('getNoteByInterval() must receive two numbers as arguments');
-    }
-
+  function getNoteByInterval (reference, interval) {
     // formula: http://www.phy.mtu.edu/~suits/NoteFreqCalcs.html
     var frequency = reference * Math.pow(TWELFTH_ROOT, interval);
     frequency = (frequency > MAX_FREQUENCY) ? MAX_FREQUENCY : frequency;
@@ -60,13 +51,13 @@ module.exports = (function () {
 
     // round to 2 decimal places for ease of reference & testing
     return Math.round(frequency * 100) / 100;
-  };
+  }
 
   /*
    * returns the interval in semitones, relative to A4
    * eg. ('A', 4) returns 0; ('C', 6) returns 13; ('A', 3) returns -12
    */
-  ScaleFactory.getIntervalFromA4 = function (noteName, octave) {
+  function getIntervalFromA4 (noteName, octave) {
     var semitonesInOctave = 12,
         A4Octave = 4,
         intervalsRelativeToA = {
@@ -80,14 +71,14 @@ module.exports = (function () {
         };
     
     return intervalsRelativeToA[noteName] + ((octave - A4Octave) * semitonesInOctave);
-  };
+  }
 
   /*
    * returns the interval adjustment for flat and sharp ()
    */
 
-  // TODO: incorporate into getIntervalFromA4
-  ScaleFactory.getIntervalAdjustment = function (sharpOrFlat) {
+  // TODO: incorporate into getIntervalFromA4?
+  function getIntervalAdjustment (sharpOrFlat) {
     var adjustments = {
       '#': 1,
       'b': -1
@@ -98,20 +89,65 @@ module.exports = (function () {
     }
 
     return adjustments[sharpOrFlat];
-  };
+  }
 
   /**
    * returns the number of cents (detune) given an interval in semitones
    */
-  ScaleFactory.getCentsByInterval = function (interval) {
+  function getCentsByInterval (interval) {
      return interval * CENTS_PER_SEMITONE;
-  };
+  }
+
+  /*
+   * returns true if passed a valid note name such as:
+   * 'A4', 'C0', 'F#5', 'Gb2', 'Cb7'
+   * otherwise returns false
+   */
+  function isValidNoteName (noteName) {
+    var validNameRegex = /^[A-G][b#]?[0-8]$/;
+
+    return typeof noteName === 'string' && validNameRegex.test(noteName);
+  }
+
+  /*
+   * returns true if a scale type with the specified scaleName is in the scale type collection
+   * otherwise returns false
+   */
+  function isScaleTypeDefined (scaleName) {
+    return scaleDefs.hasOwnProperty(scaleName);
+  }
+
+  /*
+   * returns true if passed a valid scale type (ie. is a string and is in scale definitions)
+   * otherwise returns false
+   */
+  function isValidScaleName (scaleName) {
+    var scaleNameRegex = /^[A-Za-z\-\_ ]+$/;
+
+    return typeof scaleName === 'string' && scaleNameRegex.test(scaleName);
+  }
+
+   /*
+    * returns true if passed a valid scale definition (ie. an array of integers)
+    * otherwise returns false
+    */
+  function isValidScaleDefinition (scaleDef) {
+    return Array.isArray(scaleDef) && scaleDef.every(isPositiveIntegerGreaterThanZero);
+  }
+
+  /*
+    * returns true if passed an integer
+    * otherwise returns false
+    */
+  function isPositiveIntegerGreaterThanZero (value) {
+    return (typeof value === 'number') && (value % 1 === 0) && (value > 0);
+  }
 
   /*
    * returns the frequency of a note that's equivalent to a friendly string,
    * such as 'A4', 'C0', 'F#5', 'Gb2', 'Cb7'
    */
-  ScaleFactory.getNote = function (noteString) {
+  function getNote (noteString) {
     var noteNameMatch = noteString.match(/^[A-G]/g),
         sharpOrFlatMatch = noteString.match(/[b#]/g),
         octaveMatch = noteString.match(/[0-8]/g),
@@ -121,23 +157,17 @@ module.exports = (function () {
         intervalFromA,
         adjustedInterval;
 
-    if (!noteName || typeof octave !== 'number') {
-      throw new Error('Invalid argument: getNoteName() takes a string representing a musical note, such as "A2" or "Bb6"');
-    }
+    intervalFromA = getIntervalFromA4(noteName, octave);
+    adjustedInterval = intervalFromA + getIntervalAdjustment(sharpOrFlat);
 
-    intervalFromA = ScaleFactory.getIntervalFromA4(noteName, octave);
-    adjustedInterval = intervalFromA + ScaleFactory.getIntervalAdjustment(sharpOrFlat);
-
-    return ScaleFactory.getNoteByInterval(REF_FREQUENCIES.A4, adjustedInterval);
-  };
+    return getNoteByInterval(REF_FREQUENCIES.A4, adjustedInterval);
+  }
 
   /*
    * returns an array of frequencies in Hz, representing the notes in a musical scale,
    * given the type of scale, the frequency of a starting note, and the number of notes
    */
-
-  // TODO: get all notes relative to A4?
-  ScaleFactory.makeScale = function (scaleType, startNote, noteCount) {
+  function makeScale (scaleType, startNote, noteCount) {
     var i,
         scaleDef = scaleDefs[scaleType],
         scaleInHertz = [],
@@ -145,7 +175,7 @@ module.exports = (function () {
         scaleInSemitones = [],
         intervalsFromStartNote = 0,
         intervalCounter = 0,
-        startFrequency = ScaleFactory.getNote(startNote);
+        startFrequency = getNote(startNote);
 
     // the first note is always the starting frequency
     scaleInHertz.push(startFrequency);
@@ -155,8 +185,8 @@ module.exports = (function () {
     for(i = 0; i < noteCount - 1; i += 1) {
       intervalsFromStartNote += scaleDef[intervalCounter];
 
-      scaleInHertz.push(ScaleFactory.getNoteByInterval(startFrequency, intervalsFromStartNote));
-      scaleInCents.push(ScaleFactory.getCentsByInterval(intervalsFromStartNote));
+      scaleInHertz.push(getNoteByInterval(startFrequency, intervalsFromStartNote));
+      scaleInCents.push(getCentsByInterval(intervalsFromStartNote));
       scaleInSemitones.push(intervalsFromStartNote);
 
       intervalCounter = (intervalCounter === scaleDef.length - 1) ? 0 : intervalCounter + 1;
@@ -168,23 +198,35 @@ module.exports = (function () {
       inCents: scaleInCents,
       inSemiTones: scaleInSemitones
     };
-  };
+  }
 
-  ScaleFactory.addScale = function (name, scaleDef) {
+  /*
+   * adds a new scale definition of the given name and semitone intervals definition array
+   * to the scale definitions collection
+   */
+  function addScale (name, scaleDef) {
     scaleDefs[name] = scaleDef;
-  };
+  }
 
+  /*
+   * module export functions
+   */
   return {
-    makeScale: ScaleFactory.makeScale,
-    getNote: ScaleFactory.getNote,
-    addScale: ScaleFactory.addScale,
+    makeScale: makeScale,
+    getNote: getNote,
+    addScale: addScale,
 
     // exported for testing purposes – not part of the public API
     test: {
-      getIntervalFromA4: ScaleFactory.getIntervalFromA4,
-      getIntervalAdjustment: ScaleFactory.getIntervalAdjustment,
-      getCentsByInterval: ScaleFactory.getCentsByInterval,
-      getNoteByInterval: ScaleFactory.getNoteByInterval
+      getIntervalFromA4: getIntervalFromA4,
+      getIntervalAdjustment: getIntervalAdjustment,
+      getCentsByInterval: getCentsByInterval,
+      getNoteByInterval: getNoteByInterval,
+      isValidNoteName: isValidNoteName,
+      isValidScaleName: isValidScaleName,
+      isValidScaleDefinition: isValidScaleDefinition,
+      isPositiveIntegerGreaterThanZero: isPositiveIntegerGreaterThanZero,
+      isScaleTypeDefined: isScaleTypeDefined
     }
   };
   
