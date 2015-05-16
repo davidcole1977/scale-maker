@@ -167,19 +167,19 @@ $ grunt
 
 ## Release History
 
-### 0.0.1
-* Initial commit; grunt, jshint & mocha tests hooked up
-
-### 0.0.2
-* getScale() now returns result in hertz, semitones and cents
-* removed test scale & note references into a separate module
+### 0.0.4
+* removed unnecessary ScaleFactory constructor function
+* added input validation functions isValidNoteName(), isValidScaleName(), isValidScaleDefinition(), isScaleTypeDefined(), isPositiveIntegerGreaterThanZero() (not yet incorporated into public API functions)
+* added JS compression to grunt build
 
 ### 0.0.3
 * changed function names getScale() to makeScale() and getNoteByName() to getNote()
 * divided exported functions into functions exported for testing purposes and functions exported as part of the public API
 * added new addScale() function
 
-### 0.0.4
-* removed unnecessary ScaleFactory constructor function
-* added input validation functions isValidNoteName(), isValidScaleName(), isValidScaleDefinition(), isScaleTypeDefined(), isPositiveIntegerGreaterThanZero() (not yet incorporated into public API functions)
-* added JS compression to grunt build
+### 0.0.2
+* getScale() now returns result in hertz, semitones and cents
+* removed test scale & note references into a separate module
+
+### 0.0.1
+* Initial commit; grunt, jshint & mocha tests hooked up
