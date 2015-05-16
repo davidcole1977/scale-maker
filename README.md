@@ -13,13 +13,14 @@ To be completed...
 ```js
 var ScaleFactory = require('scaleFactory');
 
-// create a minor pentatonic scale over 2 octaves (9 notes), starting on F# in the 5th octave and get the value of the notes in hertz
+// create a minor pentatonic scale over 2 octaves (9 notes), starting on F# in the
+// 5th octave and get the value of the notes in hertz
 var myScaleInHertz = ScaleFactory.makeScale('minorPentatonic', 'F#5', 9).inHertz;
 
 // adds a new scale type called 'myWeirdScale'
 ScaleFactory.addScale('myWeirdScale', [1, 2, 2, 3, 1, 2]);
 
-// which can now be used to create a new scale
+// which can now be used to create a new scale (this time in cents rather than hertz)
 var myWeirdScaleInCents = ScaleFactory.makeScale('myWeirdScale', 'Ab4', 13).inCents;
 
 // gets the frequency of a G flat in the 3rd octave
@@ -68,7 +69,7 @@ The highest note allowed is `'B8'`
 {
   inHertz: (Array),
   inCents: (Array),
-  inSemitones: (Array)
+  inSemiTones: (Array)
 }
 ```
 
@@ -78,7 +79,7 @@ For example, if requesting a major scale with 8 notes, starting on C in the 4th 
 {
   inHertz: [261.63, 293.67, 329.63, 349.23, 392.00 440.01, 493.89, 523.26],
   inCents: [0, 200, 400, 500, 700, 900, 1100, 1200],
-  inSemitones: [0, 2, 4, 5, 7, 9, 11, 12]
+  inSemiTones: [0, 2, 4, 5, 7, 9, 11, 12]
 }
 ```
 
@@ -92,6 +93,11 @@ var ScaleFactory = require('scaleFactory');
 // create a minor pentatonic scale over 2 octaves (9 notes), starting on F# in the 5th octave and get the value of the notes in hertz
 var myScaleInHertz = ScaleFactory.makeScale('minorPentatonic', 'F#5', 9).inHertz;
 
+// the same scale, this time in cents for use as a detune
+var myScaleInCents = ScaleFactory.makeScale('minorPentatonic', 'F#5', 9).inCents;
+
+// the same scale, this time in semitone intervals
+var myScaleInSemiTones = ScaleFactory.makeScale('minorPentatonic', 'F#5', 9).inSemiTones;
 ```
 
 ---------------------------
