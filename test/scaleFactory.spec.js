@@ -19,44 +19,46 @@
         });
 
         it('returns correct frequency for A4', function () {
-          var result = getNote('A4');
-
-          expect(result).to.equal(note.A4);
+          expect(getNote('A4')).to.equal(note.A4);
         });
 
         it('returns correct frequency for C0', function () {
-          var result = getNote('C0');
-
-          expect(result).to.equal(note.C0);
+          expect(getNote('C0')).to.equal(note.C0);
         });
 
         it('returns correct frequency for B8', function () {
-          var result = getNote('B8');
-
-          expect(result).to.equal(note.B8);
+          expect(getNote('B8')).to.equal(note.B8);
         });
 
         it('returns correct frequency for F#3', function () {
-          var result = getNote('F#3');
-
-          expect(result).to.equal(note.Gb3);
+          expect(getNote('F#3')).to.equal(note.Gb3);
         });
 
         it('returns correct frequency for Bb5', function () {
-          var result = getNote('Bb5');
-
-          expect(result).to.equal(note.Bb5);
+          expect(getNote('Bb5')).to.equal(note.Bb5);
         });
 
         it('returns correct frequency for Cb2', function () {
-          var result = getNote('Cb2');
-
-          expect(result).to.equal(note.Cb2);
+          expect(getNote('Cb2')).to.equal(note.Cb2);
         });
 
-        xit('handles invalid input, out of bounds etc.', function () {
-          expect(true).to.equal(false);
+      });
+
+      describe('getNote() input error handling', function () {
+        var getNote = module.getNote;
+
+        it('throws an error if note name is invalid', function () {
+          expect(getNote.bind(null, 'H9')).to.throw(Error);
         });
+
+        it('throws an error if note name is missing', function () {
+          expect(getNote.bind(null)).to.throw(Error);
+        });
+
+        it('throws an error if note name is an number', function () {
+          expect(getNote.bind(null, 123.456)).to.throw(Error);
+        });
+
       });
 
       describe('makeScale()', function () {
@@ -114,8 +116,29 @@
           expect(result.inCents).to.deep.equal(scale.Ab1MinorPentatonic30Notes.inCents);
         });
 
-        xit('handles invalid input, out of bounds etc.', function () {
+      });
 
+      describe('makeScale() input error handling', function () {
+        var makeScale = module.makeScale;
+
+        it('throws an error if passed no arguments', function () {
+          expect(makeScale.bind(null)).to.throw(Error);
+        });
+
+        it('throws an error if the scaleType name is invalid', function () {
+          expect(makeScale.bind(null, 'invalid scale name 123^&*', 'A4', 12)).to.throw(Error);
+        });
+
+        it('throws an error if the scaleType does not exist', function () {
+          expect(makeScale.bind(null, 'non-existent-scale-type', 'A4', 12)).to.throw(Error);
+        });
+
+        it('throws an error if the startNote is invalid', function () {
+          expect(makeScale.bind(null, 'major', 'H9', 12)).to.throw(Error);
+        });
+
+        it('throws an error if the noteCount is invalid', function () {
+          expect(makeScale.bind(null, 'major', 'A4', 0)).to.throw(Error);
         });
 
       });
@@ -135,8 +158,25 @@
           expect(result).to.deep.equal([0, 100, 300, 600, 1000, 1500]);
         });
 
-        xit('handles invalid input, out of bounds etc.', function () {
+      });
 
+      describe('addScale() input error handling', function () {
+        var addScale = module.addScale;
+
+        it('throws an error if any arguments are missing', function () {
+          expect(addScale.bind(null)).to.throw(Error);
+        });
+
+        it('throws an error if scale name is invalid', function () {
+          expect(addScale.bind(null, 'my invalid scale name !@£$%^', [1, 2, 3, 4, 5])).to.throw(Error);
+        });
+
+        it('throws an error if scale type is already defined', function () {
+          expect(addScale.bind(null, 'major', [1, 2, 3, 4, 5])).to.throw(Error);
+        });
+
+        it('throws an error if scale definition is invalid', function () {
+          expect(addScale.bind(null, 'my new scale type', [1, '2', 3, '4', 5])).to.throw(Error);
         });
 
       });
@@ -153,39 +193,27 @@
         });
 
         it('returns correct interval for B4', function () {
-          var result = getIntervalFromA4('B', 4);
-
-          expect(result).to.equal(2);
+          expect(getIntervalFromA4('B', 4)).to.equal(2);
         });
 
         it('returns correct interval for G4', function () {
-          var result = getIntervalFromA4('G', 4);
-
-          expect(result).to.equal(-2);
+          expect(getIntervalFromA4('G', 4)).to.equal(-2);
         });
 
         it('returns correct interval for A2', function () {
-          var result = getIntervalFromA4('A', 2);
-
-          expect(result).to.deep.equal(-24);
+          expect(getIntervalFromA4('A', 2)).to.deep.equal(-24);
         });
 
         it('returns correct interval for A6', function () {
-          var result = getIntervalFromA4('A', 6);
-
-          expect(result).to.deep.equal(24);
+          expect(getIntervalFromA4('A', 6)).to.deep.equal(24);
         });
 
         it('returns correct interval for C0', function () {
-          var result = getIntervalFromA4('C', 0);
-
-          expect(result).to.deep.equal(-57);
+          expect(getIntervalFromA4('C', 0)).to.deep.equal(-57);
         });
 
         it('returns correct interval for B8', function () {
-          var result = getIntervalFromA4('B', 8);
-
-          expect(result).to.deep.equal(50);
+          expect(getIntervalFromA4('B', 8)).to.deep.equal(50);
         });
 
       });
@@ -198,15 +226,11 @@
         });
 
         it('returns correct adjustment for "#"', function () {
-          var result = getIntervalAdjustment('#');
-
-          expect(result).to.equal(1);
+          expect(getIntervalAdjustment('#')).to.equal(1);
         });
 
         it('returns correct adjustment for "b"', function () {
-          var result = getIntervalAdjustment('b');
-
-          expect(result).to.equal(-1);
+          expect(getIntervalAdjustment('b')).to.equal(-1);
         });
 
       });
@@ -268,9 +292,62 @@
           expect(isValidNoteName).to.exist;
         });
 
-        xit('validates stuff', function () {
-          
+        it('returns true for valid note "C0"', function () {
+          expect(isValidNoteName('C0')).to.be.true;
         });
+
+        it('returns true for valid note "B8"', function () {
+          expect(isValidNoteName('B8')).to.be.true;
+        });
+
+        it('returns true for valid note "G#3"', function () {
+          expect(isValidNoteName('G#3')).to.be.true;
+        });
+
+        it('returns true for valid note "Ab7"', function () {
+          expect(isValidNoteName('Ab7')).to.be.true;
+        });
+
+        it('returns false for invalid letter "H4"', function () {
+          expect(isValidNoteName('H4')).to.be.false;
+        });
+
+        it('returns false for lowercase letter "a4"', function () {
+          expect(isValidNoteName('H4')).to.be.false;
+        });
+
+        it('returns false for invalid octave / too high note "C9"', function () {
+          expect(isValidNoteName('C9')).to.be.false;
+        });
+
+        it('returns false for invalid octave / too high note "C123"', function () {
+          expect(isValidNoteName('C123')).to.be.false;
+        });
+
+        it('returns false for invalid modifier % "C%4"', function () {
+          expect(isValidNoteName('C%4')).to.be.false;
+        });
+
+        it('returns false for wrong order "4C"', function () {
+          expect(isValidNoteName('4C')).to.be.false;
+        });
+
+        it('returns false for empty string', function () {
+          expect(isValidNoteName('')).to.be.false;
+        });
+
+        it('returns false for missing parameter', function () {
+          expect(isValidNoteName()).to.be.false;
+        });
+
+        it('returns false for number', function () {
+          expect(isValidNoteName(123.456)).to.be.false;
+        });
+
+        it('returns false for object', function () {
+          expect(isValidNoteName({foo: 'bar'})).to.be.false;
+        });
+
 
       });
 

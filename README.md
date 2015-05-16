@@ -187,6 +187,9 @@ $ grunt
 
 ## Release History
 
+### 0.0.5
+* added input error handling for public API functions
+
 ### 0.0.4
 * removed unnecessary ScaleFactory constructor function
 * added input validation functions isValidNoteName(), isValidScaleName(), isValidScaleDefinition(), isScaleTypeDefined(), isPositiveIntegerGreaterThanZero() (not yet incorporated into public API functions)

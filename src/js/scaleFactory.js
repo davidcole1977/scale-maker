@@ -148,6 +148,10 @@ module.exports = (function () {
    * such as 'A4', 'C0', 'F#5', 'Gb2', 'Cb7'
    */
   function getNote (noteString) {
+    if (!isValidNoteName(noteString)) {
+      throw new Error('Invalid argument noteString: getNote(noteString) noteString should be a valid note name, eg. "Ab0", "C7"');
+    }
+
     var noteNameMatch = noteString.match(/^[A-G]/g),
         sharpOrFlatMatch = noteString.match(/[b#]/g),
         octaveMatch = noteString.match(/[0-8]/g),
@@ -168,6 +172,21 @@ module.exports = (function () {
    * given the type of scale, the frequency of a starting note, and the number of notes
    */
   function makeScale (scaleType, startNote, noteCount) {
+    if (arguments.length < 3) {
+      throw new Error('Missing argument(s): makeScale() expects three arguments');
+    }
+    if (!isValidScaleName(scaleType)) {
+      throw new Error('Invalid argument scaleType: makeScale(scaleType, startNote, noteCount) expects scaleType to be a string consisting of lower or upper case letters (A-Z, a-z), spaces, hyphens(-) or underscores(_) only');
+    }
+    if (!isScaleTypeDefined(scaleType)) {
+      throw new Error('Scale type is undefined: makeScale(scaleType, startNote, noteCount) scale with name provided for scaleType is not defined – make sure you choose from available scale types');
+    }
+    if (!isPositiveIntegerGreaterThanZero(noteCount)) {
+      throw new Error('Invalid argument noteCount: makeScale(scaleType, startNote, noteCount) expects noteCount to be a positive integer greater than 0');
+    }
+    if (!isValidNoteName(startNote)) {
+      throw new Error('Invalid argument startNote: makeScale(scaleType, startNote, noteCount) startNote should be a valid note name, eg. "Ab0", "C7"');
+    }
     var i,
         scaleDef = scaleDefs[scaleType],
         scaleInHertz = [],
@@ -205,6 +224,19 @@ module.exports = (function () {
    * to the scale definitions collection
    */
   function addScale (name, scaleDef) {
+    if (arguments.length < 2) {
+      throw new Error('Missing argument(s): addScale() expects two arguments');
+    }
+    if (!isValidScaleName(name)) {
+      throw new Error('Invalid argument name: addScale(name, scaleDef) expects name to be a string consisting of lower or upper case letters (A-Z, a-z), spaces, hyphens(-) or underscores(_) only');
+    }
+    if (isScaleTypeDefined(name)) {
+      throw new Error('Scale type already defined: addScale(name, scaleDef) scale with value of name argument is already defined – make sure you choose a scale name not already in use');
+    }
+    if (!isValidScaleDefinition(scaleDef)) {
+      throw new Error('Invalid argument scaleDef: addScale(name, scaleDef) expects scaleDef to be an array of only positive integers greater than 0');
+    }
+
     scaleDefs[name] = scaleDef;
   }
 
