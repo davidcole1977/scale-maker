@@ -10,6 +10,22 @@ To be completed...
 
 ## Basic useage
 
+```js
+var ScaleFactory = require('scaleFactory');
+
+// create a minor pentatonic scale over 2 octaves (9 notes), starting on F# in the 5th octave and get the value of the notes in hertz
+var myScaleInHertz = ScaleFactory.makeScale('minorPentatonic', 'F#5', 9).inHertz;
+
+// adds a new scale type called 'myWeirdScale'
+ScaleFactory.addScale('myWeirdScale', [1, 2, 2, 3, 1, 2]);
+
+// which can now be used to create a new scale
+var myWeirdScaleInCents = ScaleFactory.makeScale('myWeirdScale', 'Ab4', 13).inCents;
+
+// gets the frequency of a G flat in the 3rd octave
+var myNoteInHertz = ScaleFactory.getNote('Gb3');
+```
+
 To be completed...
 
 ## Methods
