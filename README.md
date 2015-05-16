@@ -27,8 +27,6 @@ var myWeirdScaleInCents = ScaleFactory.makeScale('myWeirdScale', 'Ab4', 13).inCe
 var myNoteInHertz = ScaleFactory.getNote('Gb3');
 ```
 
-To be completed...
-
 ## Methods
 
 ### makeScale(scaleType, startNote, noteCount)
