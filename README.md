@@ -1,4 +1,4 @@
-# scale-factory
+# scale-maker
 
 Returns a variety of musical scales as arrays of values (as frequency in Hertz or cents for use as a detune) for use in the Web Audio Javascript API and other Javascript-based audio environments.
 
@@ -8,23 +8,23 @@ This is a work in progress. When it is complete, it will be available to install
 
 To be completed...
 
-## Basic useage
+## Basic usage
 
 ```js
-var ScaleFactory = require('scaleFactory');
+var ScaleMaker = require('scaleMaker');
 
 // create a minor pentatonic scale over 2 octaves (9 notes), starting on F# in the
 // 5th octave and get the value of the notes in hertz
-var myScaleInHertz = ScaleFactory.makeScale('minorPentatonic', 'F#5', 9).inHertz;
+var myScaleInHertz = ScaleMaker.makeScale('minorPentatonic', 'F#5', 9).inHertz;
 
 // adds a new scale type called 'myWeirdScale'
-ScaleFactory.addScale('myWeirdScale', [1, 2, 2, 3, 1, 2]);
+ScaleMaker.addScale('myWeirdScale', [1, 2, 2, 3, 1, 2]);
 
 // which can now be used to create a new scale (this time in cents rather than hertz)
-var myWeirdScaleInCents = ScaleFactory.makeScale('myWeirdScale', 'Ab4', 13).inCents;
+var myWeirdScaleInCents = ScaleMaker.makeScale('myWeirdScale', 'Ab4', 13).inCents;
 
 // gets the frequency of a G flat in the 3rd octave
-var myNoteInHertz = ScaleFactory.getNote('Gb3');
+var myNoteInHertz = ScaleMaker.getNote('Gb3');
 ```
 
 ## Methods
@@ -86,16 +86,16 @@ For example, if requesting a major scale with 8 notes, starting on C in the 4th 
 #### Example usage
 
 ```js
-var ScaleFactory = require('scaleFactory');
+var ScaleMaker = require('scaleMaker');
 
 // create a minor pentatonic scale over 2 octaves (9 notes), starting on F# in the 5th octave and get the value of the notes in hertz
-var myScaleInHertz = ScaleFactory.makeScale('minorPentatonic', 'F#5', 9).inHertz;
+var myScaleInHertz = ScaleMaker.makeScale('minorPentatonic', 'F#5', 9).inHertz;
 
 // the same scale, this time in cents for use as a detune
-var myScaleInCents = ScaleFactory.makeScale('minorPentatonic', 'F#5', 9).inCents;
+var myScaleInCents = ScaleMaker.makeScale('minorPentatonic', 'F#5', 9).inCents;
 
 // the same scale, this time in semitone intervals
-var myScaleInSemiTones = ScaleFactory.makeScale('minorPentatonic', 'F#5', 9).inSemiTones;
+var myScaleInSemiTones = ScaleMaker.makeScale('minorPentatonic', 'F#5', 9).inSemiTones;
 ```
 
 ---------------------------
@@ -121,10 +121,10 @@ The highest note allowed is `'B8'`
 #### Example usage
 
 ```js
-var ScaleFactory = require('scaleFactory');
+var ScaleMaker = require('scaleMaker');
 
 // gets the frequency of a G flat in the 3rd octave
-var myNoteInHertz = ScaleFactory.getNote('Gb3');
+var myNoteInHertz = ScaleMaker.getNote('Gb3');
 ```
 
 ---------------------------
@@ -146,13 +146,13 @@ Given a name and array of semitone intervals, creates a new scale type, which yo
 #### Example usage
 
 ```js
-var ScaleFactory = require('scaleFactory');
+var ScaleMaker = require('scaleMaker');
 
 // adds a new scale type called 'myWeirdScale'
-ScaleFactory.addScale('myWeirdScale', [1, 2, 2, 3, 1, 2]);
+ScaleMaker.addScale('myWeirdScale', [1, 2, 2, 3, 1, 2]);
 
 // which can now be used to create a new scale
-var myWeirdScaleInCents = ScaleFactory.makeScale('myWeirdScale', 'Ab4', 13).inCents;
+var myWeirdScaleInCents = ScaleMaker.makeScale('myWeirdScale', 'Ab4', 13).inCents;
 ```
 
 ## Development
@@ -187,11 +187,14 @@ $ grunt
 
 ## Release History
 
+### 0.0.6
+* changed name to scaleMaker / scale-maker
+
 ### 0.0.5
 * added input error handling for public API functions
 
 ### 0.0.4
-* removed unnecessary ScaleFactory constructor function
+* removed unnecessary ScaleMaker constructor function
 * added input validation functions isValidNoteName(), isValidScaleName(), isValidScaleDefinition(), isScaleTypeDefined(), isPositiveIntegerGreaterThanZero() (not yet incorporated into public API functions)
 * added JS compression to grunt build
 

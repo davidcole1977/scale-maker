@@ -1,7 +1,7 @@
 (function () {
 
   var expect = require('chai').expect,
-      module = require('../src/js/scaleFactory'),
+      module = require('../src/js/scaleMaker'),
       note = require('./example-scales.js').note,
       scale = require('./example-scales.js').scale,
       lowerBound = note.C0,

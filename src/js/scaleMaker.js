@@ -41,64 +41,6 @@ module.exports = (function () {
   }
 
   /*
-   * returns the frequency of a note that's a given number of semitones from the reference frequency (interval can be negative)
-   */ 
-  function getNoteByInterval (reference, interval) {
-    // formula: http://www.phy.mtu.edu/~suits/NoteFreqCalcs.html
-    var frequency = reference * Math.pow(TWELFTH_ROOT, interval);
-    frequency = (frequency > MAX_FREQUENCY) ? MAX_FREQUENCY : frequency;
-    frequency = (frequency < MIN_FREQUENCY) ? MIN_FREQUENCY : frequency;
-
-    // round to 2 decimal places for ease of reference & testing
-    return Math.round(frequency * 100) / 100;
-  }
-
-  /*
-   * returns the interval in semitones, relative to A4
-   * eg. ('A', 4) returns 0; ('C', 6) returns 13; ('A', 3) returns -12
-   */
-  function getIntervalFromA4 (noteName, octave) {
-    var semitonesInOctave = 12,
-        A4Octave = 4,
-        intervalsRelativeToA = {
-          C: -9,
-          D: -7,
-          E: -5,
-          F: -4,
-          G: -2,
-          A: 0,
-          B: 2    
-        };
-    
-    return intervalsRelativeToA[noteName] + ((octave - A4Octave) * semitonesInOctave);
-  }
-
-  /*
-   * returns the interval adjustment for flat and sharp ()
-   */
-
-  // TODO: incorporate into getIntervalFromA4?
-  function getIntervalAdjustment (sharpOrFlat) {
-    var adjustments = {
-      '#': 1,
-      'b': -1
-    };
-
-    if (sharpOrFlat !== '#' && sharpOrFlat !== 'b') {
-      return 0;
-    }
-
-    return adjustments[sharpOrFlat];
-  }
-
-  /**
-   * returns the number of cents (detune) given an interval in semitones
-   */
-  function getCentsByInterval (interval) {
-     return interval * CENTS_PER_SEMITONE;
-  }
-
-  /*
    * returns true if passed a valid note name such as:
    * 'A4', 'C0', 'F#5', 'Gb2', 'Cb7'
    * otherwise returns false
@@ -141,6 +83,62 @@ module.exports = (function () {
     */
   function isPositiveIntegerGreaterThanZero (value) {
     return (typeof value === 'number') && (value % 1 === 0) && (value > 0);
+  }
+
+  /*
+   * returns the frequency of a note that's a given number of semitones from the reference frequency (interval can be negative)
+   */ 
+  function getNoteByInterval (reference, interval) {
+    // formula: http://www.phy.mtu.edu/~suits/NoteFreqCalcs.html
+    var frequency = reference * Math.pow(TWELFTH_ROOT, interval);
+    frequency = (frequency > MAX_FREQUENCY) ? MAX_FREQUENCY : frequency;
+    frequency = (frequency < MIN_FREQUENCY) ? MIN_FREQUENCY : frequency;
+
+    // round to 2 decimal places for ease of reference & testing
+    return Math.round(frequency * 100) / 100;
+  }
+
+  /**
+   * returns the number of cents (detune) given an interval in semitones
+   */
+  function getCentsByInterval (interval) {
+     return interval * CENTS_PER_SEMITONE;
+  }
+
+  /*
+   * returns the interval in semitones, relative to A4
+   * eg. ('A', 4) returns 0; ('C', 6) returns 13; ('A', 3) returns -12
+   */
+  function getIntervalFromA4 (noteName, octave) {
+    var semitonesInOctave = 12,
+        A4Octave = 4,
+        intervalsRelativeToA = {
+          C: -9,
+          D: -7,
+          E: -5,
+          F: -4,
+          G: -2,
+          A: 0,
+          B: 2    
+        };
+    
+    return intervalsRelativeToA[noteName] + ((octave - A4Octave) * semitonesInOctave);
+  }
+
+  /*
+   * returns the interval adjustment for flat and sharp ('#' and 'b')
+   */
+  function getIntervalAdjustment (sharpOrFlat) {
+    var adjustments = {
+      '#': 1,
+      'b': -1
+    };
+
+    if (sharpOrFlat !== '#' && sharpOrFlat !== 'b') {
+      return 0;
+    }
+
+    return adjustments[sharpOrFlat];
   }
 
   /*
