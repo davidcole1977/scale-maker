@@ -187,6 +187,9 @@ $ grunt
 
 ## Release History
 
+### 0.0.7
+* moved main file into lib/ and corresponding updates to build & test files
+
 ### 0.0.6
 * changed name to scaleMaker / scale-maker
 

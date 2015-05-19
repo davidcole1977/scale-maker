@@ -1,9 +1,9 @@
 (function () {
 
   var expect = require('chai').expect,
-      module = require('../src/js/scaleMaker'),
-      note = require('./example-scales.js').note,
-      scale = require('./example-scales.js').scale,
+      module = require('../lib/scaleMaker'),
+      note = require('./example-scales').note,
+      scale = require('./example-scales').scale,
       lowerBound = note.C0,
       upperBound = note.B8;
 

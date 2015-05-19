@@ -8,7 +8,7 @@ module.exports = function(grunt) {
         expr: true
       },
       js: {
-        src: [ 'src/js/**/*.js']
+        src: ['lib/**/*.js', 'lib/**/*.min.js']
       },
       testJs: {
         src: [ 'test/**/*.js']
@@ -34,9 +34,9 @@ module.exports = function(grunt) {
       dev: {
         files: [{
           expand: true,
-          cwd: 'src/js',
+          cwd: 'lib',
           src: '**/*.js',
-          dest: '_build/js',
+          dest: 'lib',
           rename: function(dest, src) {
             return dest + '/' + src.replace('.js','.min.js');
           }
@@ -45,8 +45,8 @@ module.exports = function(grunt) {
     },
     watch: {
       js: {
-        files: ['src/js/**/*.js', '!src/js/vendor/*'],
-        tasks: ['jshint:js', 'mochaTest']
+        files: ['lib/**/*.js', '!lib/**/*.min.js'],
+        tasks: ['jshint:js', 'mochaTest', 'uglify:dev']
       },
       gruntfileJs: {
         files: ['Gruntfile.js'],

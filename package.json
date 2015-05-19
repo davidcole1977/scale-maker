@@ -1,6 +1,6 @@
 {
   "name": "scale-maker",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "author": {
     "name": "David Cole",
     "url": "https://github.com/davidcole1977"
@@ -12,7 +12,7 @@
     "type": "git",
     "url": "https://github.com/davidcole1977/scale-maker.git"
   },
-  "main": "",
+  "main": "lib/scaleMaker.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
