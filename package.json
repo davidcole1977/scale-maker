@@ -1,24 +1,23 @@
 {
-  "name": "scale-factory",
-  "version": "0.0.5",
+  "name": "scale-maker",
+  "version": "0.0.6",
   "author": {
     "name": "David Cole",
-    "email": "hallo@davidcole.info",
     "url": "https://github.com/davidcole1977"
   },
   "description": "Provides a variety of musical scales as arrays of values for use in the Web Audio Javascript API and other Javascript-based audio environments.",
   "keywords": ["audio", "web audio", "scales", "music", "musical", "sound"],
-  "homepage": "https://github.com/davidcole1977/scale-factory",
+  "homepage": "https://github.com/davidcole1977/scale-maker",
   "repository": {
     "type": "git",
-    "url": "https://github.com/davidcole1977/scale-factory.git"
+    "url": "https://github.com/davidcole1977/scale-maker.git"
   },
   "main": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "David Cole",
-  "license": "ISC",
+  "license": "LGPL-2.1",
   "devDependencies": {
     "chai": "2.3.x",
     "grunt": "0.4.x",
