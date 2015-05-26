@@ -4,6 +4,10 @@ Returns a variety of musical scales as arrays of values (as frequency in Hertz o
 
 This is a work in progress. When it is complete, it will be available to install as an NPM or Bower dependency.
 
+## Demo page
+
+[http://davidcole1977.github.io/scale-maker/demo/](http://davidcole1977.github.io/scale-maker/demo/)
+
 ## Installation
 
 To be completed...
