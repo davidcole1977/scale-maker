@@ -183,7 +183,20 @@ $ grunt
 
 * Incompatible with Internet Explorer versions 8 and below
 
+## Todo
+
+* dynamically create separate versions of ScaleMaker in node module / browserify and non-module formats (as a grunt plugin?)
+* unit test both versions (and unit test compressed versions?)
+* complete remaining minor scale types
+* complete readme installation and usage instructions for node module / browserify and non-module versions
+* udpate / tag as v1.0.0
+* submit to NPM and bower
+
 ## Release History
+
+### 0.0.9
+* removed browserify
+* updated demo page to not use common js modules
 
 ### 0.0.8
 * added demo page

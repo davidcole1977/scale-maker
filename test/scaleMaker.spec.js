@@ -12,7 +12,7 @@
 
     describe('public API', function () {
 
-      describe.only('getNote()', function () {
+      describe('getNote()', function () {
         var getNote = module.getNote;
 
         it('exists', function () {

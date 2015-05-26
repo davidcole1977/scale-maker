@@ -1,4 +1,4 @@
-module.exports = (function () {
+var ExampleScales = (function () {
 
   var scale = {},
       note;
@@ -295,3 +295,7 @@ module.exports = (function () {
   };
   
 })();
+
+if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
+  module.exports = ExampleScales;
+}

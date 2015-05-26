@@ -6,8 +6,11 @@ module.exports = function(grunt) {
       options: {
         expr: true
       },
+      demoJs: {
+        src: ['demo/js/*.js']
+      },
       js: {
-        src: ['src/**/*.js', 'lib/**/*.js', '!lib/**/*.min.js']
+        src: ['lib/**/*.js', '!lib/**/*.min.js']
       },
       testJs: {
         src: [ 'test/**/*.js']
@@ -42,21 +45,14 @@ module.exports = function(grunt) {
         }]
       }
     },
-    browserify: {
-      dev: {
-        files: {
-          'demo/js/demo.js': ['src/js/demo.js']
-        }
-      }
-    },
     watch: {
       js: {
-        files: ['src/**/*.js', 'lib/**/*.js', '!lib/**/*.min.js'],
+        files: ['lib/**/*.js', '!lib/**/*.min.js'],
         tasks: ['jshint:js', 'mochaTest', 'uglify:dev']
       },
-      js_browserify: {
-        files: ['src/**/*.js', 'lib/**/*.js', '!lib/**/*.min.js'],
-        tasks: ['browserify:dev']
+      demoJs: {
+        files: ['demo/js/*.js'],
+        tasks: ['jshint:demoJs']
       },
       gruntfileJs: {
         files: ['Gruntfile.js'],
@@ -73,19 +69,12 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-mocha-test');
   grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-browserify');
 
   grunt.registerTask('default', [
-    'browserify',
+    'jshint',
+    'mochaTest',
     'uglify',
     'watch'
-  ]);
-
-   // for some reason browserify doesn't like to run after mochaTest in the grunt default task list,
-  // so separating out the test tasks for now (tests & linting are still included in the default watch task)
-  grunt.registerTask('test', [
-    'jshint',
-    'mochaTest'
   ]);
 
 };
