@@ -1,12 +1,16 @@
 {
   "name": "scale-maker",
-  "version": "0.0.7",
-  "author": {
-    "name": "David Cole",
-    "url": "https://github.com/davidcole1977"
-  },
+  "version": "0.0.8",
+  "author": "David Cole",
   "description": "Provides a variety of musical scales as arrays of values for use in the Web Audio Javascript API and other Javascript-based audio environments.",
-  "keywords": ["audio", "web audio", "scales", "music", "musical", "sound"],
+  "keywords": [
+    "audio",
+    "web audio",
+    "scales",
+    "music",
+    "musical",
+    "sound"
+  ],
   "homepage": "https://github.com/davidcole1977/scale-maker",
   "repository": {
     "type": "git",
@@ -16,16 +20,16 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "David Cole",
   "license": "LGPL-2.1",
   "devDependencies": {
     "chai": "2.3.x",
     "grunt": "0.4.x",
-    "grunt-contrib-clean": "0.6.x",
+    "grunt-browserify": "^3.8.0",
     "grunt-contrib-jshint": "0.11.x",
     "grunt-contrib-uglify": "0.9.x",
     "grunt-contrib-watch": "0.6.x",
     "grunt-mocha-test": "0.12.x",
+    "lodash": "^3.9.2",
     "mocha": "2.2.x"
   }
 }

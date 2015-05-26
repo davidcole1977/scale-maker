@@ -162,8 +162,6 @@ var myWeirdScaleInCents = ScaleMaker.makeScale('myWeirdScale', 'Ab4', 13).inCent
 * [grunt](http://gruntjs.com/)
 * [node](https://nodejs.org/)
 
-Source files live in `src/`
-
 Mocha unit tests live in `test/`
 
 ### Set up
@@ -175,7 +173,7 @@ $ npm install
 ### Running the grunt tasks
 
 ```bash
-#linting and unit tests
+#linting, unit tests, compression
 $ grunt
 ```
 
@@ -186,6 +184,12 @@ $ grunt
 * Incompatible with Internet Explorer versions 8 and below
 
 ## Release History
+
+### 0.0.8
+* added demo page
+* added scale settings to example scales
+* reduced duplication in test spec
+* added browserify to grunt build (for demo page)
 
 ### 0.0.7
 * moved main file into lib/ and corresponding updates to build & test files

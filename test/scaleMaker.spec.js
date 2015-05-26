@@ -1,6 +1,7 @@
 (function () {
 
   var expect = require('chai').expect,
+      _ = require('lodash'),
       module = require('../lib/scaleMaker'),
       note = require('./example-scales').note,
       scale = require('./example-scales').scale,
@@ -11,7 +12,7 @@
 
     describe('public API', function () {
 
-      describe('getNote()', function () {
+      describe.only('getNote()', function () {
         var getNote = module.getNote;
 
         it('exists', function () {
@@ -68,52 +69,17 @@
           expect(makeScale).to.exist;
         });
 
-        it('makes a C major scale, single octave (8 notes), starting at C4', function () {
-          var result = makeScale('major', 'C4', 8);
+        _.forEach(scale, function (testScale) {
+          var options = testScale.options;
 
-          expect(result.inHertz).to.deep.equal(scale.C4MajorSingleOctave.inHertz);
-          expect(result.inSemiTones).to.deep.equal(scale.C4MajorSingleOctave.inSemiTones);
-          expect(result.inCents).to.deep.equal(scale.C4MajorSingleOctave.inCents);
-        });
+          it('makes a ' + options.type + ' scale, ' + options.noteCount + ', starting at ' + options.startNote, function () {
+            var result = makeScale(options.type, options.startNote, options.noteCount);
 
-        it('makes a chromatic scale, 18 notes, starting at A0', function () {
-          var result = makeScale('chromatic', 'A0', 18);
+            expect(result.inHertz).to.deep.equal(testScale.inHertz);
+            expect(result.inSemiTones).to.deep.equal(testScale.inSemiTones);
+            expect(result.inCents).to.deep.equal(testScale.inCents);
+          });
 
-          expect(result.inHertz).to.deep.equal(scale.A0ChromaticEighteenNotes.inHertz);
-          expect(result.inSemiTones).to.deep.equal(scale.A0ChromaticEighteenNotes.inSemiTones);
-          expect(result.inCents).to.deep.equal(scale.A0ChromaticEighteenNotes.inCents);
-        });
-
-        it('makes a whole tone scale, three octaves (19 notes), starting at Gb2', function () {
-          var result = makeScale('wholeTone', 'Gb2', 19);
-
-          expect(result.inHertz).to.deep.equal(scale.Gb2WholeToneScaleThreeOctaves.inHertz);
-          expect(result.inSemiTones).to.deep.equal(scale.Gb2WholeToneScaleThreeOctaves.inSemiTones);
-          expect(result.inCents).to.deep.equal(scale.Gb2WholeToneScaleThreeOctaves.inCents);
-        });
-
-        it('makes a major pentatonic scale, two octaves (11 notes), starting at C5', function () {
-          var result = makeScale('majorPentatonic', 'C5', 11);
-
-          expect(result.inHertz).to.deep.equal(scale.C4MajorPentatonicTwoOctaves.inHertz);
-          expect(result.inSemiTones).to.deep.equal(scale.C4MajorPentatonicTwoOctaves.inSemiTones);
-          expect(result.inCents).to.deep.equal(scale.C4MajorPentatonicTwoOctaves.inCents);
-        });
-
-        it('makes a minor pentatonic scale, 6 notes, starting at Ab1', function () {
-          var result = makeScale('minorPentatonic', 'Ab1', 6);
-
-          expect(result.inHertz).to.deep.equal(scale.Ab1MinorPentatonic6Notes.inHertz);
-          expect(result.inSemiTones).to.deep.equal(scale.Ab1MinorPentatonic6Notes.inSemiTones);
-          expect(result.inCents).to.deep.equal(scale.Ab1MinorPentatonic6Notes.inCents);
-        });
-
-        it('makes a minor pentatonic scale, 30 notes, starting at Ab1', function () {
-          var result = makeScale('minorPentatonic', 'Ab1', 30);
-
-          expect(result.inHertz).to.deep.equal(scale.Ab1MinorPentatonic30Notes.inHertz);
-          expect(result.inSemiTones).to.deep.equal(scale.Ab1MinorPentatonic30Notes.inSemiTones);
-          expect(result.inCents).to.deep.equal(scale.Ab1MinorPentatonic30Notes.inCents);
         });
 
       });

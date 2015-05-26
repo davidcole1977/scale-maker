@@ -1,0 +1,43 @@
+<!doctype html>
+<html class="no-js" lang="en-GB">
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>scaleMaker.js demo</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="css/vendor/normalize.css">
+    <link rel="stylesheet" href="css/main.css">
+  </head>
+
+  <body>
+
+    <h1>scaleMaker.js demo</h1>
+
+    <p>Note: depending on the quality of your speakers and ears, you might not hear the very low notes</p>
+
+    <template id="scale-template">
+
+      <div id="scale-demo-container" class="scale-demo-container">
+        <h2 class="scale-description"></h2>
+        <button class="play-scale-btn">play scale</button>
+        <pre class="code">ScaleMaker = require('scaleMaker');
+var scale = ScaleMaker.makeScale(<span class="scale-params"></span>);
+
+console.log(scale.inHertz);<br/><span class="code-comment"><span class="code-array in-hertz"></span></span>
+
+console.log(scale.inSemiTones);<br/><span class="code-comment"><span class="code-array in-semitones"></span></span>
+
+console.log(scale.inCents);<br/><span class="code-comment"><span class="code-array in-cents"></span></span></pre>
+      </div>
+
+    </template>
+
+    <script src="js/demo.js"></script>
+
+  </body>
+  
+</html>

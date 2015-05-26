@@ -22,6 +22,11 @@ module.exports = (function () {
 
   // scale return values in hertz have been adjusted in some instance to account for rounding
   scale.C4MajorSingleOctave = {};
+  scale.C4MajorSingleOctave.options = {
+    type: 'major',
+    startNote: 'C4',
+    noteCount: 8
+  };
   scale.C4MajorSingleOctave.inHertz = [
     261.63, // C4
     293.67, // D4
@@ -47,6 +52,11 @@ module.exports = (function () {
   });
 
   scale.A0ChromaticEighteenNotes = {};
+  scale.A0ChromaticEighteenNotes.options = {
+    type: 'chromatic',
+    startNote: 'A0',
+    noteCount: 18
+  };
   scale.A0ChromaticEighteenNotes.inHertz = [
     27.50, // A0
     29.14, // Bb0
@@ -92,6 +102,11 @@ module.exports = (function () {
   });
 
   scale.Gb2WholeToneScaleThreeOctaves = {};
+  scale.Gb2WholeToneScaleThreeOctaves.options = {
+    type: 'wholeTone',
+    startNote: 'Gb2',
+    noteCount: 19
+  };
   scale.Gb2WholeToneScaleThreeOctaves.inHertz = [
     92.50, // Gb2
     103.83, // Ab2
@@ -139,6 +154,11 @@ module.exports = (function () {
   });
 
   scale.C4MajorPentatonicTwoOctaves = {};
+  scale.C4MajorPentatonicTwoOctaves.options = {
+    type: 'majorPentatonic',
+    startNote: 'C5',
+    noteCount: 11
+  };
   scale.C4MajorPentatonicTwoOctaves.inHertz = [
     523.25, // C5
     587.33, // D5
@@ -170,6 +190,11 @@ module.exports = (function () {
   });
 
   scale.Ab1MinorPentatonic6Notes = {};
+  scale.Ab1MinorPentatonic6Notes.options = {
+    type: 'minorPentatonic',
+    startNote: 'Ab1',
+    noteCount: 6
+  };
   scale.Ab1MinorPentatonic6Notes.inHertz = [
     51.91, // Ab1
     61.73, // B1
@@ -191,6 +216,11 @@ module.exports = (function () {
   });
 
   scale.Ab1MinorPentatonic30Notes = {};
+  scale.Ab1MinorPentatonic30Notes.options = {
+    type: 'minorPentatonic',
+    startNote: 'Ab1',
+    noteCount: 30
+  };
   scale.Ab1MinorPentatonic30Notes.inHertz = [
     51.91, // Ab1
     61.73, // B1

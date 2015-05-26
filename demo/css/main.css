@@ -1,0 +1,49 @@
+html {
+  padding: 1em;
+}
+
+.scale-demo-container {
+  margin: 4em 0;
+}
+
+.scale-demo-container h3 {
+  margin: 0.5em 2em;
+}
+
+.play-scale-btn {
+  margin: 0.5em 2em;
+  padding: 0.25em;
+  background-color: #ccc;
+}
+
+.code {
+  margin: 0.5em 2em;
+  border: 1px solid #ccc;
+  background-color: #eee;
+  padding: 0.5em;
+  line-height: 1.4;
+}
+
+.code-comment {
+  color: #999;
+}
+
+.code-array:before {
+  content: '[';
+}
+
+.code-array:after {
+  content: ']';
+}
+
+.code-comment:before {
+  content: '// ';
+}
+
+.code-scale-entry:after {
+  content: ', ';
+}
+
+.code-scale-entry:last-of-type:after {
+  content: none;
+}
