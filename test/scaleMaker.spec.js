@@ -19,28 +19,11 @@
           expect(getNote).to.exist;
         });
 
-        it('returns correct frequency for A4', function () {
-          expect(getNote('A4')).to.equal(note.A4);
-        });
+        _.forEach(note, function (hertz, noteName) {
+          it('returns correct frequency (' + hertz + 'Hz) for ' + noteName, function () {
+            expect(getNote(noteName)).to.equal(hertz);
+          });
 
-        it('returns correct frequency for C0', function () {
-          expect(getNote('C0')).to.equal(note.C0);
-        });
-
-        it('returns correct frequency for B8', function () {
-          expect(getNote('B8')).to.equal(note.B8);
-        });
-
-        it('returns correct frequency for F#3', function () {
-          expect(getNote('F#3')).to.equal(note.Gb3);
-        });
-
-        it('returns correct frequency for Bb5', function () {
-          expect(getNote('Bb5')).to.equal(note.Bb5);
-        });
-
-        it('returns correct frequency for Cb2', function () {
-          expect(getNote('Cb2')).to.equal(note.Cb2);
         });
 
       });
@@ -72,7 +55,7 @@
         _.forEach(scale, function (testScale) {
           var options = testScale.options;
 
-          it('makes a ' + options.type + ' scale, ' + options.noteCount + ', starting at ' + options.startNote, function () {
+          it('makes a ' + options.type + ' scale, ' + options.noteCount + ' notes, starting at ' + options.startNote, function () {
             var result = makeScale(options.type, options.startNote, options.noteCount);
 
             expect(result.inHertz).to.deep.equal(testScale.inHertz);

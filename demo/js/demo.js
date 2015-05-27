@@ -71,12 +71,12 @@
     var scaleTemplate = document.querySelector('#scale-template');
 
     // loop through the various scales and assemble & render the HTML elemenents for each, plus attach play event to button
-    _.forEach(ExampleScales.scale, function (testScale, key) {
+    _.forEach(DemoScales.scale, function (testScale, key) {
 
       var modifiedTemplate = document.importNode(scaleTemplate.content, true),
-          makeScaleArgs = document.createTextNode(testScale.options.type + ', ' + testScale.options.startNote + ', ' + testScale.options.noteCount),
-          scaleDescription = document.createTextNode(testScale.options.type + ' scale, ' + testScale.options.noteCount + ' notes, starting on ' + testScale.options.startNote),
-          generatedScale = ScaleMaker.makeScale(testScale.options.type, testScale.options.startNote, testScale.options.noteCount),
+          makeScaleArgs = document.createTextNode('\'' + testScale.type + '\', ' + testScale.startNote + ', ' + testScale.noteCount),
+          scaleDescription = document.createTextNode(testScale.type + ' scale, ' + testScale.noteCount + ' notes, starting on ' + testScale.startNote),
+          generatedScale = ScaleMaker.makeScale(testScale.type, testScale.startNote, testScale.noteCount),
           templateID = 'scale-' + key;
 
       // populate template copy

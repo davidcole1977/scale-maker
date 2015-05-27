@@ -42,16 +42,16 @@ Given a start note, the type of scale and the number of notes in the scale, retu
 **`scaleType` (String)** string representing the type of scale. eg. `'major'`,  `'chromatic'`, etc.
 
 Possible values:
+* `'major'`
+* `'naturalMinor'`
+* `'harmonicMinor'`
+* `'melodicMinor'`
 * `'chromatic'`
 * `'wholeTone'`
-* `'major'`
 * `'majorPentatonic'`
 * `'minorPentatonic'`
 * `'kuomiPentatonic'`
 * `'chinesePentatonic'`
-* `'naturalMinor'` (not yet implemented)
-* `'harmonicMinor'` (not yet implemented)
-* `'melodicMinor'` (not yet implemented)
 
 **`startNote` (String)** The note name, flat or sharp flag, and octave number of the first note of the scale expressed as a 2 or 3 character string, eg:
 
@@ -192,11 +192,20 @@ $ grunt
 * dynamically create separate versions of ScaleMaker in node module / browserify and non-module formats (as a grunt plugin?)
 * unit test both versions (and unit test compressed versions?)
 * complete remaining minor scale types
+* unit test / demo for remaining scale types (including kuomi and chinese pentatonic)
 * complete readme installation and usage instructions for node module / browserify and non-module versions
 * udpate / tag as v1.0.0
 * submit to NPM and bower
+* add to function outputs: makeScale as note names; makeScale & getNote as midi note values
+* option to specify number of octaves
 
 ## Release History
+
+### 0.0.10
+* added the remaining minor scales
+* corrected code typo on demo page
+* updated scales used on demo page
+* optimised getNote unit tests
 
 ### 0.0.9
 * removed browserify

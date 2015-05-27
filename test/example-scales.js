@@ -1,4 +1,4 @@
-var ExampleScales = (function () {
+module.exports = (function () {
 
   var scale = {},
       note;
@@ -189,32 +189,6 @@ var ExampleScales = (function () {
     return semitones * 100;
   });
 
-  scale.Ab1MinorPentatonic6Notes = {};
-  scale.Ab1MinorPentatonic6Notes.options = {
-    type: 'minorPentatonic',
-    startNote: 'Ab1',
-    noteCount: 6
-  };
-  scale.Ab1MinorPentatonic6Notes.inHertz = [
-    51.91, // Ab1
-    61.73, // B1
-    69.29, // Db2
-    77.78, // Eb2
-    92.49, // Gb2
-    103.82 // Ab2
-  ];
-  scale.Ab1MinorPentatonic6Notes.inSemiTones = [
-    0,
-    3,
-    5,
-    7,
-    10,
-    12
-  ];
-  scale.Ab1MinorPentatonic6Notes.inCents = scale.Ab1MinorPentatonic6Notes.inSemiTones.map(function (semitones) {
-    return semitones * 100;
-  });
-
   scale.Ab1MinorPentatonic30Notes = {};
   scale.Ab1MinorPentatonic30Notes.options = {
     type: 'minorPentatonic',
@@ -295,7 +269,3 @@ var ExampleScales = (function () {
   };
   
 })();
-
-if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
-  module.exports = ExampleScales;
-}
