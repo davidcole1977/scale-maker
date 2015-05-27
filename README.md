@@ -191,10 +191,8 @@ $ grunt
 
 * dynamically create separate versions of ScaleMaker in node module / browserify and non-module formats (as a grunt plugin?)
 * unit test both versions (and unit test compressed versions?)
-* complete remaining minor scale types
 * unit test / demo for remaining scale types (including kuomi and chinese pentatonic)
 * complete readme installation and usage instructions for node module / browserify and non-module versions
-* udpate / tag as v1.0.0
 * submit to NPM and bower
 * add to function outputs: makeScale as note names; makeScale & getNote as midi note values
 * option to specify number of octaves
