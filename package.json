@@ -1,6 +1,6 @@
 {
   "name": "scale-maker",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "author": "David Cole",
   "description": "Provides a variety of musical scales as arrays of values for use in the Web Audio Javascript API and other Javascript-based audio environments.",
   "keywords": [

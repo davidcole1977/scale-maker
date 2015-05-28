@@ -2,15 +2,25 @@
 
 Returns a variety of musical scales as arrays of values (as frequency in Hertz or cents for use as a detune) for use in the Web Audio Javascript API and other Javascript-based audio environments.
 
-This is a work in progress. When it is complete, it will be available to install as an NPM or Bower dependency.
-
 ## Demo page
 
 [http://davidcole1977.github.io/scale-maker/demo/](http://davidcole1977.github.io/scale-maker/demo/)
 
-## Installation
+## Getting started (Node JS)
 
-To be completed...
+```bash
+npm install scale-maker --save
+```
+
+Once the module is installed, include it in your Node JS code using `require()`
+
+```js
+var ScaleMaker = require('scale-maker');
+```
+
+## Getting started (Bower)
+
+(Soon to be made available as a Bower module)
 
 ## Basic usage
 
@@ -190,11 +200,14 @@ $ grunt
 ## Todo
 
 * complete readme installation and usage instructions for node module / browserify and non-module versions
-* submit to NPM and bower
+* submit to Bower
 * add to function outputs: makeScale as note names; makeScale & getNote as midi note values
 * option to specify number of octaves
 
 ## Version history
+
+### 0.0.12
+* created bower.json file
 
 ### 0.0.11
 * automatically generate non-node version of ScaleMaker module

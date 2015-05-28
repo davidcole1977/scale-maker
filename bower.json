@@ -1,0 +1,25 @@
+{
+  "name": "scale-maker",
+  "version": "0.0.12",
+  "homepage": "https://github.com/davidcole1977/scale-maker",
+  "authors": [
+    "David Cole <hallo@davidcole.info>"
+  ],
+  "description": "Provides a variety of musical scales as arrays of values for use in the Web Audio Javascript API and other Javascript-based audio environment",
+  "main": "lib/scaleMaker.js",
+  "ignore": [
+    "Gruntfile.js",
+    "package.json",
+    "test"
+  ],
+  "keywords": [
+    "audio",
+    "web",
+    "audio",
+    "music",
+    "musical",
+    "scales",
+    "sound"
+  ],
+  "license": "LGPL-2.1"
+}
