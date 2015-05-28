@@ -49,7 +49,7 @@ var ScaleMaker = require('./bower_components/scale-maker/lib/node/scaleMaker.min
 ## Basic usage
 
 ```js
-var ScaleMaker = require('scale-maker');
+var ScaleMaker = require('scale-maker'); // skip this bit if you're including the module using an HTML script tag
 
 // create a minor pentatonic scale over 2 octaves (9 notes), starting on F# in the
 // 5th octave and get the value of the notes in hertz
@@ -114,8 +114,6 @@ The highest note allowed is `'B8'`
 #### Example usage
 
 ```js
-var ScaleMaker = require('scale-maker');
-
 // create a minor pentatonic scale over 2 octaves (9 notes), starting on F# in the 5th octave and get the value of the notes in hertz
 var myScaleInHertz = ScaleMaker.makeScale('minorPentatonic', 'F#5', 9).inHertz;
 
@@ -149,8 +147,6 @@ The highest note allowed is `'B8'`
 #### Example usage
 
 ```js
-var ScaleMaker = require('scale-maker');
-
 // gets the frequency of a G flat in the 3rd octave
 var myNoteInHertz = ScaleMaker.getNote('Gb3');
 ```
@@ -174,8 +170,6 @@ Given a name and array of semitone intervals, creates a new scale type, which yo
 #### Example usage
 
 ```js
-var ScaleMaker = require('scale-maker');
-
 // adds a new scale type called 'myWeirdScale'
 ScaleMaker.addScale('myWeirdScale', [1, 2, 2, 3, 1, 2]);
 
