@@ -1,6 +1,6 @@
 {
   "name": "scale-maker",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "author": "David Cole",
   "description": "Provides a variety of musical scales as arrays of values for use in the Web Audio Javascript API and other Javascript-based audio environments.",
   "keywords": [
@@ -16,7 +16,7 @@
     "type": "git",
     "url": "https://github.com/davidcole1977/scale-maker.git"
   },
-  "main": "lib/scaleMaker.js",
+  "main": "lib/node/scaleMaker.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

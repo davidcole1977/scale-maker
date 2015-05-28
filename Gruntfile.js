@@ -1,7 +1,29 @@
 module.exports = function(grunt) {
 
+  /**
+   * Takes a 'vanilla' JS module and replaces "var moduleName =" with "module.exports =""
+   * to turn it into a Node module 
+   */
+  grunt.registerMultiTask('modulify', function () {
+    var moduleContents = grunt.file.read(this.files[0].src[0]),
+        moduleName = this.options().moduleName,
+        dest = this.files[0].dest;
+
+    moduleContents = moduleContents.replace('var ' + moduleName, 'module.exports');
+    grunt.file.write(dest, moduleContents);
+  });
+
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
+    modulify: {
+      scaleMaker: {
+        options: {
+          moduleName: 'ScaleMaker'
+        },
+        src: ['lib/scaleMaker.js'],
+        dest: 'lib/node/scaleMaker.js'
+      }
+    },
     jshint: {
       options: {
         expr: true
@@ -48,7 +70,7 @@ module.exports = function(grunt) {
     watch: {
       js: {
         files: ['lib/**/*.js', '!lib/**/*.min.js'],
-        tasks: ['jshint:js', 'mochaTest', 'uglify:dev']
+        tasks: ['jshint:js', 'modulify', 'mochaTest', 'uglify:dev']
       },
       demoJs: {
         files: ['demo/js/*.js'],
@@ -72,6 +94,7 @@ module.exports = function(grunt) {
 
   grunt.registerTask('default', [
     'jshint',
+    'modulify',
     'mochaTest',
     'uglify',
     'watch'
