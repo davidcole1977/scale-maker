@@ -6,13 +6,15 @@ Returns a variety of musical scales as arrays of values (as frequency in Hertz o
 
 [http://davidcole1977.github.io/scale-maker/demo/](http://davidcole1977.github.io/scale-maker/demo/)
 
-## Getting started (Node JS)
+## Getting started (NPM / Node)
+
+Install using npm
 
 ```bash
 npm install scale-maker --save
 ```
 
-Once the module is installed, include it in your Node JS code using `require()`
+Once the module is installed, include it in your JS code using `require()`
 
 ```js
 var ScaleMaker = require('scale-maker');
@@ -20,7 +22,29 @@ var ScaleMaker = require('scale-maker');
 
 ## Getting started (Bower)
 
-(Soon to be made available as a Bower module)
+Install using bower
+
+```bash
+bower install scale-maker --save
+```
+
+Once the module is installed, include it in your HTML page
+
+```html
+<script src="bower_components/scale-maker/lib/scaleMaker.min.js"></script>
+```
+
+ and then refer to it in your Javscript as `ScaleMaker`, eg.
+
+```js
+var myScaleInHertz = ScaleMaker.makeScale('minorPentatonic', 'F#5', 9).inHertz;
+```
+
+Alternatively, you can include it using Node JS or Browserify
+
+```js
+var ScaleMaker = require('./bower_components/scale-maker/lib/node/scaleMaker.min.js');
+```
 
 ## Basic usage
 
