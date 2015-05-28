@@ -49,7 +49,7 @@ var ScaleMaker = require('./bower_components/scale-maker/lib/node/scaleMaker.min
 ## Basic usage
 
 ```js
-var ScaleMaker = require('scale-maker'); // skip this bit if you're including the module using an HTML script tag
+var ScaleMaker = require('scale-maker'); // skip this line if you're including the module using an HTML script tag
 
 // create a minor pentatonic scale over 2 octaves (9 notes), starting on F# in the
 // 5th octave and get the value of the notes in hertz
