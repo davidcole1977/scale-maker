@@ -213,8 +213,9 @@ $ grunt
 
 ## Todo
 
+* demo page: use on-screen keyboard to play a scale – code example updates in realtime as you play, with code to make the scale you're playing
 * add to function outputs: makeScale as note names; makeScale & getNote as midi note values
-* option to specify number of octaves
+* option to specify number of octaves as well as number of notes
 
 ## Version history
 
