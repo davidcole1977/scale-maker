@@ -74,7 +74,7 @@
     _.forEach(DemoScales.scale, function (testScale, key) {
 
       var modifiedTemplate = document.importNode(scaleTemplate.content, true),
-          makeScaleArgs = document.createTextNode('\'' + testScale.type + '\', ' + testScale.startNote + ', ' + testScale.noteCount),
+          makeScaleArgs = document.createTextNode('\'' + testScale.type + '\', \'' + testScale.startNote + '\', ' + testScale.noteCount),
           scaleDescription = document.createTextNode(testScale.type + ' scale, ' + testScale.noteCount + ' notes, starting on ' + testScale.startNote),
           generatedScale = ScaleMaker.makeScale(testScale.type, testScale.startNote, testScale.noteCount),
           templateID = 'scale-' + key;

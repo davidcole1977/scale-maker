@@ -15,7 +15,7 @@ To be completed...
 ## Basic usage
 
 ```js
-var ScaleMaker = require('scaleMaker');
+var ScaleMaker = require('scale-maker');
 
 // create a minor pentatonic scale over 2 octaves (9 notes), starting on F# in the
 // 5th octave and get the value of the notes in hertz
@@ -90,7 +90,7 @@ For example, if requesting a major scale with 8 notes, starting on C in the 4th 
 #### Example usage
 
 ```js
-var ScaleMaker = require('scaleMaker');
+var ScaleMaker = require('scale-maker');
 
 // create a minor pentatonic scale over 2 octaves (9 notes), starting on F# in the 5th octave and get the value of the notes in hertz
 var myScaleInHertz = ScaleMaker.makeScale('minorPentatonic', 'F#5', 9).inHertz;
@@ -125,7 +125,7 @@ The highest note allowed is `'B8'`
 #### Example usage
 
 ```js
-var ScaleMaker = require('scaleMaker');
+var ScaleMaker = require('scale-maker');
 
 // gets the frequency of a G flat in the 3rd octave
 var myNoteInHertz = ScaleMaker.getNote('Gb3');
@@ -150,7 +150,7 @@ Given a name and array of semitone intervals, creates a new scale type, which yo
 #### Example usage
 
 ```js
-var ScaleMaker = require('scaleMaker');
+var ScaleMaker = require('scale-maker');
 
 // adds a new scale type called 'myWeirdScale'
 ScaleMaker.addScale('myWeirdScale', [1, 2, 2, 3, 1, 2]);
