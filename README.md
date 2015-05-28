@@ -99,17 +99,7 @@ The highest note allowed is `'B8'`
 **`noteCount` (Integer)** The number of notes you'd like in the scale. For instance if you want two octaves of a major scale, that's 15 notes.
 
 #### Returns
-**(Object)** Object with three parameters, each an array representing the value of notes in hertz, cents and semitone intervals in the form
-
-```js
-{
-  inHertz: (Array),
-  inCents: (Array),
-  inSemiTones: (Array)
-}
-```
-
-For example, if requesting a major scale with 8 notes, starting on C in the 4th octave, the return value would be:
+**(Object)** Object with three parameters, each an array representing the value of notes in hertz, cents and semitone intervals. For example, if requesting a major scale with 8 notes, starting on C in the 4th octave, the return value would be:
 
 ```js
 {
@@ -223,12 +213,13 @@ $ grunt
 
 ## Todo
 
-* complete readme installation and usage instructions for node module / browserify and non-module versions
-* submit to Bower
 * add to function outputs: makeScale as note names; makeScale & getNote as midi note values
 * option to specify number of octaves
 
 ## Version history
+
+### 0.1.0
+* Now available as a Bower component and NPM module
 
 ### 0.0.12
 * created bower.json file
