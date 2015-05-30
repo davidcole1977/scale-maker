@@ -2,7 +2,7 @@
 
   var expect = require('chai').expect,
       _ = require('lodash'),
-      module = require('../lib/scaleMaker'),
+      module = require('../lib/node/scaleMaker'),
       note = require('./example-scales').note,
       scale = require('./example-scales').scale,
       lowerBound = note.C0,

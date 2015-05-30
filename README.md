@@ -213,6 +213,9 @@ $ grunt
 
 ## Version history
 
+### 0.1.1
+* Corrected reference to module in mocha unit tests
+
 ### 0.1.0
 * Now available as a Bower component and NPM module
 
