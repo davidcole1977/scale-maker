@@ -193,7 +193,7 @@ Returns the names of all available scales, as an array of strings
 ScaleMaker.addScale('myWeirdScale', [1, 2, 2, 3, 1, 2]);
 
 // gets the names of available scales, including the scale that was just added
-var allScales = ScaleMaker.getScales();
+var allScales = ScaleMaker.getScaleNames();
 
 // allScales === ['chromatic', 'wholeTone', 'major', 'majorPentatonic', 'minorPentatonic', 'kuomiPentatonic', 'chinesePentatonic', 'naturalMinor', 'harmonicMinor', 'melodicMinor', 'myWeirdScale'];
 
