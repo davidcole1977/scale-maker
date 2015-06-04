@@ -213,6 +213,9 @@ $ grunt
 
 ## Version history
 
+### 0.2.0
+* Added new public getScaleNames() method to return all available scale names as an array
+
 ### 0.1.1
 * Corrected reference to module in mocha unit tests
 

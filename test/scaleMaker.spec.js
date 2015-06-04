@@ -92,6 +92,38 @@
 
       });
 
+      describe('getScaleNames()', function () {
+        var getScaleNames = module.getScaleNames,
+            addScale = module.addScale;
+
+        it('exists', function () {
+          expect(getScaleNames).to.exist;
+        });
+
+        it('returns the set of all available default and user-define scales', function () {
+          addScale('my-scale', [1,2,3]);
+          addScale('my-other-scale', [4,5,6]);
+
+          var expectedResult = [
+            'chromatic',
+            'wholeTone',
+            'major',
+            'majorPentatonic',
+            'minorPentatonic',
+            'kuomiPentatonic',
+            'chinesePentatonic',
+            'naturalMinor',
+            'harmonicMinor',
+            'melodicMinor',
+            'my-scale',
+            'my-other-scale'
+          ];
+          
+          expect(getScaleNames()).to.deep.equal(expectedResult);
+        });
+
+      });
+
       describe('addScale()', function () {
         var addScale = module.addScale;
 
@@ -127,7 +159,6 @@
         it('throws an error if scale definition is invalid', function () {
           expect(addScale.bind(null, 'my new scale type', [1, '2', 3, '4', 5])).to.throw(Error);
         });
-
       });
 
     }); // describe('public API', function () {
