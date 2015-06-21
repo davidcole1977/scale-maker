@@ -13,8 +13,23 @@ module.exports = function(grunt) {
     grunt.file.write(dest, moduleContents);
   });
 
+  grunt.registerMultiTask('simple_log', function () {
+    var logText = this.options().logText;
+
+    grunt.log.ok(logText);
+  });
+
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
+
+    simple_log: {
+      coverage_complete: {
+        options: {
+          logText: 'Coverage report available at coverage/reports/icov-report/index.html'
+        }
+      }
+    },
+
     modulify: {
       scaleMaker: {
         options: {
@@ -24,9 +39,11 @@ module.exports = function(grunt) {
         dest: 'lib/node/scaleMaker.js'
       }
     },
+
     jshint: {
       options: {
-        expr: true
+        expr: true,
+        ignores: ['test/coverage/**/*.js']
       },
       demoJs: {
         src: ['demo/js/*.js']
@@ -41,15 +58,49 @@ module.exports = function(grunt) {
         src: ['Gruntfile.js']
       }
     },
+
     mochaTest: {
       dev: {
         options: {
           reporter: 'spec',
           clearRequireCache: true // Optionally clear the require cache before running tests (defaults to false) 
         },
-        src: ['test/**/*.spec.js']
+        src: ['test/mocha/**/*.spec.js']
       }
     },
+
+    env: {
+      dist: {
+        LIB_DIR: '../../lib/'
+      },
+      coverage: {
+        LIB_DIR: '../../test/coverage/instrument/lib/'
+      }
+    },
+
+    instrument: {
+      files: ['lib/node/**/*.js'],
+      options: {
+        lazy: true,
+        basePath: 'test/coverage/instrument/'
+      }
+    },
+
+    storeCoverage: {
+      options: {
+        dir: 'test/coverage/reports'
+      }
+    },
+
+    makeReport: {
+      src: 'test/coverage/reports/**/*.json',
+      options: {
+        type: 'lcov',
+        dir: 'test/coverage/reports',
+        print: 'detail'
+      }
+    },
+
     uglify: {
       options: {
         mangle: false,
@@ -67,6 +118,7 @@ module.exports = function(grunt) {
         }]
       }
     },
+
     watch: {
       js: {
         files: ['lib/**/*.js', '!lib/**/*.min.js'],
@@ -89,10 +141,25 @@ module.exports = function(grunt) {
 
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-mocha-test');
   grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-mocha-test');
+  grunt.loadNpmTasks('grunt-istanbul');
+  grunt.loadNpmTasks('grunt-env');
+
+  grunt.registerTask('coverage', [
+    'env:coverage',
+    'jshint',
+    'modulify',
+    'instrument',
+    'mochaTest',
+    'storeCoverage',
+    'makeReport',
+    'uglify',
+    'simple_log:coverage_complete'
+  ]);
 
   grunt.registerTask('dist', [
+    'env:dist',
     'jshint',
     'modulify',
     'mochaTest',

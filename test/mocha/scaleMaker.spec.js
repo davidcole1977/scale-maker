@@ -2,7 +2,8 @@
 
   var expect = require('chai').expect,
       _ = require('lodash'),
-      module = require('../lib/node/scaleMaker'),
+      libDir = process.env.LIB_DIR || 'lib/',
+      module = require(libDir + 'node/scaleMaker'),
       note = require('./example-scales').note,
       scale = require('./example-scales').scale,
       lowerBound = note.C0,

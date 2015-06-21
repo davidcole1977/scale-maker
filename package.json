@@ -28,6 +28,8 @@
     "grunt-contrib-jshint": "0.11.x",
     "grunt-contrib-uglify": "0.9.x",
     "grunt-contrib-watch": "0.6.x",
+    "grunt-env": "^0.4.4",
+    "grunt-istanbul": "^0.6.1",
     "grunt-mocha-test": "0.12.x",
     "lodash": "^3.9.2",
     "mocha": "2.2.x"
