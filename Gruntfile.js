@@ -92,11 +92,15 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-mocha-test');
   grunt.loadNpmTasks('grunt-contrib-uglify');
 
-  grunt.registerTask('default', [
+  grunt.registerTask('dist', [
     'jshint',
     'modulify',
     'mochaTest',
-    'uglify',
+    'uglify'
+  ]);
+
+  grunt.registerTask('default', [
+    'dist',
     'watch'
   ]);
 
