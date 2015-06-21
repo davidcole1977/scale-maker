@@ -237,6 +237,9 @@ $ grunt
 
 ## Version history
 
+### 0.2.1
+* Added Travis CI support, including build status image in readme file
+
 ### 0.2.0
 * Added new public getScaleNames() method to return all available scale names as an array
 
