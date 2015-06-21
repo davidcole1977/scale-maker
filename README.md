@@ -1,5 +1,9 @@
 # scale-maker
 
+https://travis-ci.org/davidcole1977/scale-maker.svg?branch=master
+
+[![Build Status](https://travis-ci.org/davidcole1977/scale-maker.svg?branch=master)](https://travis-ci.org/davidcole1977/scale-maker)
+
 Returns a variety of musical scales as arrays of values (as frequency in Hertz or cents for use as a detune) for use in the Web Audio Javascript API and other Javascript-based audio environments.
 
 ## Demo page
