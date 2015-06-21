@@ -237,6 +237,9 @@ $ grunt
 
 ## Version history
 
+### 0.2.2
+* Added code coverage with Istanbul and Coveralls
+
 ### 0.2.1
 * Added Travis CI support, including build status image in readme file
 
