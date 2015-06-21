@@ -101,6 +101,12 @@ module.exports = function(grunt) {
       }
     },
 
+    coveralls: {
+      coverage: {
+        src: 'test/coverage/reports/**/*.info',
+      }
+    },
+
     uglify: {
       options: {
         mangle: false,
@@ -144,17 +150,15 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-mocha-test');
   grunt.loadNpmTasks('grunt-istanbul');
+  grunt.loadNpmTasks('grunt-coveralls');
   grunt.loadNpmTasks('grunt-env');
 
   grunt.registerTask('coverage', [
     'env:coverage',
-    'jshint',
-    'modulify',
     'instrument',
     'mochaTest',
     'storeCoverage',
     'makeReport',
-    'uglify',
     'simple_log:coverage_complete'
   ]);
 
@@ -163,7 +167,8 @@ module.exports = function(grunt) {
     'jshint',
     'modulify',
     'mochaTest',
-    'uglify'
+    'uglify',
+    'coverage'
   ]);
 
   grunt.registerTask('default', [
